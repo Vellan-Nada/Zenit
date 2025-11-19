@@ -19,6 +19,25 @@ requiredVars.forEach((key) => {
   }
 });
 
+const parseOrigins = () => {
+  const configured =
+    process.env.CLIENT_URLS ||
+    process.env.CLIENT_URL ||
+    process.env.VERCEL_URL ||
+    'http://localhost:5173';
+
+  return configured
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean)
+    .map((value) => {
+      if (value.startsWith('http')) {
+        return value;
+      }
+      return `https://${value}`;
+    });
+};
+
 export const env = {
   nodeEnv: process.env.NODE_ENV || 'development',
   port: process.env.PORT || 5000,
@@ -32,5 +51,6 @@ export const env = {
   stripeSuccessUrl: process.env.STRIPE_SUCCESS_URL,
   stripeCancelUrl: process.env.STRIPE_CANCEL_URL,
   openAiApiKey: process.env.OPENAI_API_KEY,
-  clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
+  clientOrigins: parseOrigins(),
+  railwayUrl: process.env.RAILWAY_URL,
 };

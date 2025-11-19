@@ -12,7 +12,15 @@ app.set('trust proxy', 1);
 
 app.use(
   cors({
-    origin: env.clientUrl,
+    origin: (origin, callback) => {
+      if (!origin) {
+        return callback(null, true);
+      }
+      if (env.clientOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
     credentials: true,
   })
 );
@@ -34,7 +42,7 @@ app.get('/', (req, res) => {
   res.json({
     name: 'EverDay API',
     status: 'ok',
-    docs: 'https://everday-c-production.up.railway.app/api',
+    docs: env.railwayUrl ? `${env.railwayUrl.replace(/\/$/, '')}/api` : '/api',
     timestamp: new Date().toISOString(),
   });
 });
