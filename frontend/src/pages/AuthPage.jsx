@@ -5,9 +5,10 @@ import styles from '../styles/AuthPage.module.css';
 
 const AuthPage = ({ mode = 'login' }) => {
   const navigate = useNavigate();
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, signInWithProvider } = useAuth();
   const [form, setForm] = useState({ email: '', password: '' });
   const [status, setStatus] = useState({ loading: false, error: null, success: null });
+  const [oauthLoading, setOauthLoading] = useState(false);
 
   const handleChange = (event) => {
     setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
@@ -33,6 +34,17 @@ const AuthPage = ({ mode = 'login' }) => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    setStatus((prev) => ({ ...prev, error: null, success: null }));
+    setOauthLoading(true);
+    try {
+      await signInWithProvider('google');
+    } catch (err) {
+      setStatus({ loading: false, error: err.message, success: null });
+      setOauthLoading(false);
+    }
+  };
+
   const headline = mode === 'login' ? 'Welcome back to EverDay' : 'Create your EverDay account';
 
   return (
@@ -42,6 +54,36 @@ const AuthPage = ({ mode = 'login' }) => {
           <h1>{headline}</h1>
           <p className={styles.mutedText}>Access your universal productivity space.</p>
         </div>
+        <button
+          type="button"
+          className={styles.socialButton}
+          onClick={handleGoogleSignIn}
+          disabled={oauthLoading}
+        >
+          <span
+            aria-hidden="true"
+            style={{
+              width: '24px',
+              height: '24px',
+              borderRadius: '50%',
+              background: '#fff',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '1px solid rgba(0,0,0,0.1)',
+              fontWeight: 700,
+              color: '#ea4335',
+            }}
+          >
+            G
+          </span>
+          {oauthLoading ? 'Connecting to Google…' : 'Continue with Google'}
+        </button>
+
+        <div className={styles.divider}>
+          <span>or continue with email</span>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
             <label htmlFor="email">Email</label>

@@ -95,6 +95,20 @@ export const AuthProvider = ({ children }) => {
     setProfile(null);
   }, []);
 
+  const signInWithProvider = useCallback(async (provider) => {
+    const redirectTo = typeof window !== 'undefined' ? window.location.origin : undefined;
+    const { data, error: authError } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo,
+      },
+    });
+    if (authError) {
+      throw authError;
+    }
+    return data;
+  }, []);
+
   const plan = profile?.plan || 'free';
   const planExpiresAt = profile?.plan_expires_at || null;
   const isPro = plan === 'pro' && (!planExpiresAt || new Date(planExpiresAt).getTime() > Date.now());
@@ -114,6 +128,7 @@ export const AuthProvider = ({ children }) => {
       signIn,
       signUp,
       signOut,
+      signInWithProvider,
       refreshProfile: loadProfile,
     }),
     [
@@ -130,6 +145,7 @@ export const AuthProvider = ({ children }) => {
       signIn,
       signUp,
       signOut,
+      signInWithProvider,
       loadProfile,
     ]
   );

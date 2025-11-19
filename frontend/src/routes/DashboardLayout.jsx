@@ -103,11 +103,17 @@ const DashboardLayout = () => {
             <AnnouncementBanner signedIn={Boolean(user)} />
             {authLoading ? (
               <LoadingSpinner label="Checking session…" />
-            ) : featureError ? (
-              <p style={{ color: 'var(--danger)' }}>{featureError}</p>
             ) : (
               <div className={layoutStyles.panelBody}>
-                <Outlet context={{ features }} />
+                {featureError && (
+                  <div
+                    className="info-toast"
+                    style={{ marginBottom: '0.75rem', background: 'rgba(239,68,68,0.08)', color: '#b91c1c' }}
+                  >
+                    Unable to load feature catalog. You can still explore the dashboard, but some previews might be missing.
+                  </div>
+                )}
+                <Outlet context={{ features, featureError }} />
               </div>
             )}
           </div>
