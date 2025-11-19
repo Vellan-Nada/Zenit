@@ -30,6 +30,15 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+  res.json({
+    name: 'EverDay API',
+    status: 'ok',
+    docs: 'https://everday-c-production.up.railway.app/api',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
