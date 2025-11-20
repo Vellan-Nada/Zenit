@@ -205,6 +205,11 @@
   padding: 0.6rem 0.8rem;
 }
 
+.history-item-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
 .history-item button {
   border: none;
   border-radius: 0.75rem;
@@ -212,6 +217,10 @@
   color: #fff;
   padding: 0.4rem 0.8rem;
   font-weight: 600;
+}
+
+.history-item button.danger {
+  background: #f87171;
 }
 
 .habit-modal-backdrop {

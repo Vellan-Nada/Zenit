@@ -223,6 +223,20 @@ const HabitTrackerPage = () => {
     await loadHabits();
   };
 
+  const handleDestroyHabit = async (habit) => {
+    const proceed = window.confirm(
+      `Delete “${habit.name}” permanently? This will remove its history forever.`
+    );
+    if (!proceed) return;
+    try {
+      await supabase.from('habits').delete().eq('id', habit.id);
+      await loadHabits();
+    } catch (err) {
+      console.error(err);
+      setError('Unable to delete habit permanently.');
+    }
+  };
+
   if (loading) {
     return <div className="habit-empty">Loading habits…</div>;
   }
@@ -274,7 +288,7 @@ const HabitTrackerPage = () => {
 
       {isPremium && <StreakSummaryCard habits={habits} />}
 
-      <HistoryList items={history} onRestore={handleRestoreHabit} />
+      <HistoryList items={history} onRestore={handleRestoreHabit} onDelete={handleDestroyHabit} />
 
       <AddHabitModal
         open={modalState.open}

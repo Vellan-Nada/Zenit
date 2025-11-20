@@ -1,4 +1,4 @@
-const HistoryList = ({ items, onRestore }) => {
+const HistoryList = ({ items, onRestore, onDelete }) => {
   if (!items.length) return null;
   return (
     <div className="history-card">
@@ -13,9 +13,14 @@ const HistoryList = ({ items, onRestore }) => {
                 Best streak: {habit.best_streak} days
               </p>
             </div>
-            <button type="button" onClick={() => onRestore(habit)}>
-              Add back
-            </button>
+            <div className="history-item-actions">
+              <button type="button" onClick={() => onRestore(habit)}>
+                Add back
+              </button>
+              <button type="button" className="danger" onClick={() => onDelete(habit)}>
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
