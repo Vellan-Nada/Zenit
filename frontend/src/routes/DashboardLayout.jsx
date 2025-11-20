@@ -65,6 +65,11 @@ const DashboardLayout = () => {
   };
 
   const handleFeedback = () => {
+    if (!user) {
+      navigate('/signup');
+      setToast('Create a free account to share feedback and save your workspace.');
+      return;
+    }
     setFeedbackOpen(true);
   };
 

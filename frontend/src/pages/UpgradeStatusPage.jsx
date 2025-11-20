@@ -6,7 +6,7 @@ const STATUS_COPY = {
   success: {
     title: 'Payment confirmed 🎉',
     description: 'Your EverDay Pro plan is now active. You can close this tab or return to the dashboard.',
-    action: 'Back to dashboard',
+    action: 'Return to dashboard',
   },
   cancel: {
     title: 'Checkout canceled',
@@ -16,7 +16,7 @@ const STATUS_COPY = {
   donation: {
     title: 'Donation received 🙏',
     description: 'Thank you for supporting EverDay!',
-    action: 'Return to EverDay',
+    action: 'Return to Dashboard',
   },
 };
 

@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { submitFeedback } from '../controllers/feedbackController.js';
-import { optionalAuth } from '../middleware/auth.js';
+import { requireAuth } from '../middleware/auth.js';
 
 const router = Router();
 
-router.post('/', optionalAuth, submitFeedback);
+router.post('/', requireAuth, submitFeedback);
 
 export default router;
