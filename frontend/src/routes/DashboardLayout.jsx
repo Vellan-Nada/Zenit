@@ -14,7 +14,7 @@ import layoutStyles from '../styles/DashboardLayout.module.css';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
-  const { user, token, signOut, authLoading, isPro, planTier } = useAuth();
+  const { user, token, profile, signOut, authLoading, isPro, planTier } = useAuth();
   const [features, setFeatures] = useState([]);
   const [featureError, setFeatureError] = useState(null);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
@@ -77,9 +77,11 @@ const DashboardLayout = () => {
           <div className={layoutStyles.panel}>
             <div className={layoutStyles.topBar}>
               <div>
-                <h2 style={{ margin: 0 }}>Hey {user?.email || 'there'} 👋</h2>
+                <h2 style={{ margin: 0, fontSize: '1.7rem' }}>
+                  Hey {(profile?.username || profile?.full_name || user?.email || 'there')} 👋
+                </h2>
                 <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-                  Stay consistent with habits, tasks, and mindful focus in one tab.
+                  Everything you need for habits, notes, focus, and inspiration—organized in one calm space.
                 </p>
               </div>
               <div className={layoutStyles.topActions}>
@@ -127,10 +129,7 @@ const DashboardLayout = () => {
             ) : (
               <div className={layoutStyles.panelBody}>
                 {featureError && (
-                  <div
-                    className="info-toast"
-                    style={{ marginBottom: '0.75rem', background: 'rgba(239,68,68,0.08)', color: '#b91c1c' }}
-                  >
+                  <div className="info-toast" style={{ marginBottom: '0.75rem', color: '#b91c1c' }}>
                     Unable to load feature catalog. You can still explore the dashboard, but some previews might be missing.
                   </div>
                 )}

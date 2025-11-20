@@ -2,7 +2,7 @@ import styles from '../styles/FeaturePanel.module.css';
 
 const AnnouncementBanner = ({ signedIn }) => {
   return (
-    <div className={styles.placeholderBox} role="status">
+    <div className={styles.announcement} role="status">
       {signedIn ? (
         <strong>Welcome back! Your changes will auto-sync to Supabase.</strong>
       ) : (

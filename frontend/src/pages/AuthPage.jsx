@@ -6,7 +6,7 @@ import styles from '../styles/AuthPage.module.css';
 const AuthPage = ({ mode = 'login' }) => {
   const navigate = useNavigate();
   const { signIn, signUp, signInWithProvider } = useAuth();
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ email: '', password: '', username: '' });
   const [status, setStatus] = useState({ loading: false, error: null, success: null });
   const [oauthLoading, setOauthLoading] = useState(false);
 
@@ -85,6 +85,21 @@ const AuthPage = ({ mode = 'login' }) => {
         </div>
 
         <form onSubmit={handleSubmit}>
+          {mode === 'signup' && (
+            <div className={styles.inputGroup}>
+              <label htmlFor="username">Username</label>
+              <input
+                id="username"
+                type="text"
+                name="username"
+                required
+                minLength={3}
+                value={form.username}
+                onChange={handleChange}
+                placeholder="Your display name"
+              />
+            </div>
+          )}
           <div className={styles.inputGroup}>
             <label htmlFor="email">Email</label>
             <input

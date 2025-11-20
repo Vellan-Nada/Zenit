@@ -1,9 +1,9 @@
 .pillButton {
   position: relative;
-  border: none;
-  background: rgba(37, 99, 235, 0.12);
+  border: 1px solid var(--border);
+  background: #fff;
   border-radius: 999px;
-  padding: 0.55rem 1rem;
+  padding: 0.5rem 0.95rem;
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -14,7 +14,7 @@
 .feedbackButton {
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 0.55rem 1.1rem;
+  padding: 0.5rem 1rem;
   background: #fff;
   display: flex;
   align-items: center;
@@ -23,15 +23,15 @@
 
 .tooltip {
   position: absolute;
-  top: calc(100% + 0.3rem);
+  top: calc(100% + 0.35rem);
   right: 0;
   z-index: 20;
   background: #fff;
   border-radius: 0.9rem;
   padding: 0.85rem;
   min-width: 220px;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
 }
 
 .tooltip p {

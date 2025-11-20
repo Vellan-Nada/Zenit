@@ -81,6 +81,11 @@ export const AuthProvider = ({ children }) => {
     const { data, error: authError } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          username,
+        },
+      },
     });
     if (authError) {
       throw authError;

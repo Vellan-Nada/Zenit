@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: radial-gradient(circle at top, rgba(99, 102, 241, 0.2), transparent 45%);
+  background: #f4f6f8;
 }
 
 .card {
@@ -51,7 +51,7 @@
   border: none;
   border-radius: 0.9rem;
   padding: 0.85rem;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: var(--accent);
   color: #fff;
   font-weight: 600;
   font-size: 1.05rem;

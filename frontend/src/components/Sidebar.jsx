@@ -4,6 +4,7 @@ import styles from '../styles/Sidebar.module.css';
 import ProfileMenu from './ProfileMenu.jsx';
 
 const navItems = [
+  { label: 'Dashboard', path: '/' },
   { label: 'Habit Tracker', path: '/habits' },
   { label: 'Notes', path: '/notes' },
   { label: 'To Do List', path: '/tasks' },
@@ -33,12 +34,13 @@ const Sidebar = ({ onUpgradeClick = () => {}, onManageSubscription = () => {} })
       </div>
 
       <div>
-        <div className={styles.navSectionTitle}>Toolkit</div>
+        <div className={styles.navSectionTitle}>Workspace</div>
         <nav className={styles.nav} aria-label="Feature navigation">
           {navItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
+              end={item.path === '/'}
               className={({ isActive }) =>
                 `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
               }

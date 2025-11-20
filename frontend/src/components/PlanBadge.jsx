@@ -2,20 +2,20 @@ import { useAuth } from '../hooks/useAuth.js';
 
 const PLAN_STYLES = {
   free: {
-    border: 'rgba(148,163,184,0.6)',
+    border: '#e5e7eb',
     background: 'transparent',
     color: 'var(--text-muted)',
     label: 'Free plan',
   },
   plus: {
-    border: 'rgba(251,191,36,0.7)',
-    background: 'rgba(251,191,36,0.18)',
+    border: '#fcd34d',
+    background: '#fff7ed',
     color: '#b45309',
     label: 'Plus plan',
   },
   pro: {
-    border: 'rgba(34,197,94,0.4)',
-    background: 'rgba(34,197,94,0.15)',
+    border: '#86efac',
+    background: '#ecfdf3',
     color: '#15803d',
     label: 'Pro plan',
   },

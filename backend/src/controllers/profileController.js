@@ -17,6 +17,7 @@ const ensureProfileRow = async (user) => {
     .insert({
       id: user.id,
       email: user.email ?? user.user_metadata?.email ?? null,
+      username: user.user_metadata?.username ?? null,
       plan: 'free',
     })
     .select()
@@ -45,13 +46,32 @@ export const getProfile = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    const { full_name, avatar_url } = req.body;
+    const { full_name, avatar_url, username } = req.body;
+
+    if (username) {
+      const { data: existing, error: usernameError } = await supabaseAdmin
+        .from('profiles')
+        .select('id')
+        .eq('username', username)
+        .neq('id', req.userId)
+        .maybeSingle();
+
+      if (usernameError && usernameError.code !== 'PGRST116') {
+        logger.error('updateProfile username check error', usernameError);
+        return res.status(400).json({ error: 'Unable to validate username' });
+      }
+
+      if (existing) {
+        return res.status(400).json({ error: 'Username already taken' });
+      }
+    }
 
     const { data, error } = await supabaseAdmin
       .from('profiles')
       .update({
         full_name,
         avatar_url,
+        username,
         updated_at: new Date().toISOString(),
       })
       .eq('id', req.userId)

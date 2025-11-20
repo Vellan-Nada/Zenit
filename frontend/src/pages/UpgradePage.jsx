@@ -9,19 +9,11 @@ const tierRank = { free: 0, plus: 1, pro: 2 };
 
 const PLAN_CARDS = [
   {
-    tier: 'free',
-    title: 'Starter',
-    price: '$0',
-    subtitle: 'Explore every workspace locally.',
-    accent: '#fff',
-    features: ['All 9 tools in preview', 'Local-only data', 'Community updates'],
-  },
-  {
     tier: 'plus',
     title: 'Plus',
     price: '$5/mo',
     subtitle: 'Sync and back up your productivity OS.',
-    accent: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+    accent: '#edf2ff',
     features: [
       'Secure sync & daily backups',
       'Habit + task history',
@@ -34,7 +26,7 @@ const PLAN_CARDS = [
     title: 'Pro',
     price: '$15/mo',
     subtitle: 'Everything in Plus + AI helper superpowers.',
-    accent: 'linear-gradient(135deg, #f97316, #ef4444)',
+    accent: '#fef2f2',
     highlight: true,
     features: [
       'AI Helper unlimited prompts',

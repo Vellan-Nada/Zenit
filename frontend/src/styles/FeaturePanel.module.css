@@ -32,10 +32,10 @@
 }
 
 .placeholderBox {
-  border: 1px dashed var(--border);
-  border-radius: 1rem;
-  padding: 1rem;
-  background: rgba(148, 163, 184, 0.07);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  background: #fff;
 }
 
 .ctaRow {
@@ -48,20 +48,28 @@
   background: var(--accent);
   color: #fff;
   border: none;
-  border-radius: 0.75rem;
-  padding: 0.65rem 1.1rem;
+  border-radius: 0.85rem;
+  padding: 0.65rem 1.2rem;
   font-weight: 600;
 }
 
 .secondaryButton {
   border: 1px solid var(--border);
   background: #fff;
-  border-radius: 0.75rem;
-  padding: 0.65rem 1.1rem;
+  border-radius: 0.85rem;
+  padding: 0.65rem 1.2rem;
   color: #0f172a;
 }
 
 .infoNote {
   font-size: 0.85rem;
   color: var(--text-muted);
+}
+
+.announcement {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  background: var(--card-muted);
+  color: #0f172a;
 }

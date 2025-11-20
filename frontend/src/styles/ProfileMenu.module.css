@@ -16,8 +16,9 @@
 }
 
 .avatar {
-  width: 36px;
-  height: 36px;
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: #fff;
@@ -105,12 +106,13 @@
 
 .guestBox {
   margin-top: auto;
-  border: 1px dashed var(--border);
-  border-radius: 1rem;
-  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  background: #fff;
 }
 
 .guestBox button {
