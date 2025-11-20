@@ -6,6 +6,8 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  position: relative;
+  z-index: 30;
 }
 
 .brand {
@@ -88,11 +90,31 @@
   font-weight: 600;
 }
 
-@media (max-width: 768px) {
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  display: none;
+}
+
+@media (max-width: 900px) {
   .sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 1.25rem;
+    position: fixed;
+    inset: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .closeButton {
+    display: block;
   }
 }

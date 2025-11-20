@@ -19,6 +19,7 @@ const DashboardLayout = () => {
   const [featureError, setFeatureError] = useState(null);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [toast, setToast] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const loadFeatures = async () => {
@@ -72,11 +73,24 @@ const DashboardLayout = () => {
   return (
     <>
       <div className={layoutStyles.appShell}>
-        <Sidebar onUpgradeClick={handleUpgradeClick} onManageSubscription={handleManageSubscription} />
+        <Sidebar
+          isMobileOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          onUpgradeClick={handleUpgradeClick}
+          onManageSubscription={handleManageSubscription}
+        />
         <main className={layoutStyles.contentArea}>
           <div className={layoutStyles.panel}>
             <div className={layoutStyles.topBar}>
-              <div>
+              <div className={layoutStyles.mobileToggle}>
+                <button
+                  type="button"
+                  className={layoutStyles.menuButton}
+                  onClick={() => setSidebarOpen((prev) => !prev)}
+                >
+                  ☰
+                </button>
+
                 <h2 style={{ margin: 0, fontSize: '1.7rem' }}>
                   Hey {(profile?.username || profile?.full_name || user?.email || 'there')} 👋
                 </h2>

@@ -26,7 +26,7 @@ const PLAN_CARDS = [
     title: 'Pro',
     price: '$15/mo',
     subtitle: 'Everything in Plus + AI helper superpowers.',
-    accent: '#fef2f2',
+    accent: '#e0ecff',
     highlight: true,
     features: [
       'AI Helper unlimited prompts',
@@ -123,14 +123,14 @@ const UpgradePage = () => {
                 borderRadius: '1rem',
                 padding: '1.5rem',
                 background: plan.highlight ? plan.accent : '#fff',
-                color: plan.highlight ? '#fff' : '#0f172a',
-                border: plan.highlight ? 'none' : '1px solid var(--border)',
-                boxShadow: plan.highlight ? '0 30px 60px rgba(15,23,42,0.25)' : 'none',
+                color: '#0f172a',
+                border: plan.highlight ? '1px solid #c7d2fe' : '1px solid var(--border)',
+                boxShadow: plan.highlight ? '0 30px 60px rgba(15,23,42,0.12)' : 'none',
                 position: 'relative',
               }}
             >
               <h2 style={{ marginTop: 0 }}>{plan.title}</h2>
-              <p style={{ color: plan.highlight ? 'rgba(255,255,255,0.85)' : 'var(--text-muted)' }}>{plan.subtitle}</p>
+              <p style={{ color: plan.highlight ? '#1f3b8a' : 'var(--text-muted)' }}>{plan.subtitle}</p>
               <p style={{ fontSize: '2.4rem', fontWeight: 700, margin: '1rem 0' }}>{plan.price}</p>
               <ul
                 style={{
@@ -154,8 +154,8 @@ const UpgradePage = () => {
                     borderRadius: '0.9rem',
                     border: 'none',
                     padding: '0.85rem 1rem',
-                    background: plan.highlight ? '#fff' : '#0f172a',
-                    color: plan.highlight ? '#1d4ed8' : '#fff',
+                  background: plan.highlight ? '#1d4ed8' : '#0f172a',
+                  color: '#fff',
                     fontWeight: 700,
                     cursor: disabled ? 'not-allowed' : 'pointer',
                     opacity: disabled ? 0.6 : 1,

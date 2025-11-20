@@ -16,7 +16,12 @@ const navItems = [
   { label: 'AI Helper', path: '/ai-helper' },
 ];
 
-const Sidebar = ({ onUpgradeClick = () => {}, onManageSubscription = () => {} }) => {
+const Sidebar = ({
+  onUpgradeClick = () => {},
+  onManageSubscription = () => {},
+  isMobileOpen = false,
+  onClose = () => {},
+}) => {
   const { planTier } = useAuth();
   const showUpgradeCta = planTier !== 'pro';
   const ctaTitle = planTier === 'plus' ? 'Ready for AI superpowers?' : 'Unlock EverDay Pro';
@@ -27,7 +32,10 @@ const Sidebar = ({ onUpgradeClick = () => {}, onManageSubscription = () => {} })
   const ctaButton = planTier === 'plus' ? 'Go Pro' : 'See plans';
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${isMobileOpen ? styles.sidebarOpen : ''}`}>
+      <button type="button" className={styles.closeButton} onClick={onClose}>
+        ✕
+      </button>
       <div className={styles.brand}>
         <h1>EverDay</h1>
         <span>All-in-one productivity space</span>

@@ -40,6 +40,21 @@
   margin-bottom: 1.25rem;
 }
 
+.mobileToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.menuButton {
+  display: none;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 0.4rem 0.75rem;
+  font-size: 1.1rem;
+}
+
 .topActions {
   display: flex;
   align-items: center;
@@ -67,11 +82,14 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .appShell {
     flex-direction: column;
   }
   .contentArea {
     padding: 1.25rem;
+  }
+  .menuButton {
+    display: inline-flex;
   }
 }
