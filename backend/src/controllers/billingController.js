@@ -105,7 +105,7 @@ export const createCheckoutSession = async (req, res) => {
       mode: isDonation ? 'payment' : 'subscription',
       payment_method_types: ['card'],
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: env.stripeSuccessUrl,
+      success_url: isDonation ? env.stripeDonationSuccessUrl : env.stripeSuccessUrl,
       cancel_url: env.stripeCancelUrl,
       customer_email: req.user.email,
       metadata: {

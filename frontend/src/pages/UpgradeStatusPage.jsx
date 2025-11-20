@@ -13,6 +13,11 @@ const STATUS_COPY = {
     description: 'No charge was made. You can always restart checkout whenever you are ready.',
     action: 'Try again',
   },
+  donation: {
+    title: 'Donation received 🙏',
+    description: 'Thank you for supporting EverDay!',
+    action: 'Return to EverDay',
+  },
 };
 
 const UpgradeStatusPage = ({ status }) => {
@@ -28,7 +33,11 @@ const UpgradeStatusPage = ({ status }) => {
   }, [status, refreshProfile]);
 
   const goBack = () => {
-    navigate(status === 'success' ? '/' : '/upgrade', { replace: true });
+    if (status === 'success' || status === 'donation') {
+      navigate('/', { replace: true });
+    } else {
+      navigate('/upgrade', { replace: true });
+    }
   };
 
   return (

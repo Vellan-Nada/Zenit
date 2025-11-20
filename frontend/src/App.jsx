@@ -35,6 +35,7 @@ const App = () => {
             <Route path="ai-helper" element={<AiHelperPage />} />
             <Route path="upgrade" element={<UpgradePage />} />
             <Route path="upgrade/success" element={<UpgradeStatusPage status="success" />} />
+            <Route path="upgrade/donation" element={<UpgradeStatusPage status="donation" />} />
             <Route path="upgrade/cancel" element={<UpgradeStatusPage status="cancel" />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />

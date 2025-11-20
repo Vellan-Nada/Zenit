@@ -135,7 +135,7 @@ const UpgradePage = () => {
               <ul
                 style={{
                   paddingLeft: '1.1rem',
-                  color: plan.highlight ? 'rgba(255,255,255,0.9)' : 'var(--text-muted)',
+                  color: plan.highlight ? 'rgba(9, 0, 0, 0.9)' : 'var(--text-muted)',
                   lineHeight: 1.6,
                 }}
               >

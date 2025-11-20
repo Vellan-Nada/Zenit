@@ -51,6 +51,7 @@ export const env = {
   stripePricePro: process.env.STRIPE_PRICE_PRO,
   stripeDonationPrice: process.env.STRIPE_DONATION_PRICE,
   stripeSuccessUrl: process.env.STRIPE_SUCCESS_URL,
+  stripeDonationSuccessUrl: process.env.STRIPE_DONATION_SUCCESS_URL || process.env.STRIPE_SUCCESS_URL,
   stripeCancelUrl: process.env.STRIPE_CANCEL_URL,
   openAiApiKey: process.env.OPENAI_API_KEY,
   clientOrigins: parseOrigins(),
