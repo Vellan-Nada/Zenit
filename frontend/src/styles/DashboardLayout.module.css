@@ -13,6 +13,19 @@
   gap: 1.25rem;
 }
 
+.topRail {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: #f4f6f8;
+  border-bottom: 1px solid var(--border);
+}
+
 .panel {
   background: #fff;
   border-radius: var(--radius);
@@ -27,17 +40,6 @@
 .panelBody {
   flex: 1;
   overflow: auto;
-}
-
-.topBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 1.25rem;
 }
 
 .mobileToggle {

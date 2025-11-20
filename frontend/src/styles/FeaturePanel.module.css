@@ -65,11 +65,3 @@
   font-size: 0.85rem;
   color: var(--text-muted);
 }
-
-.announcement {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem 1.25rem;
-  background: var(--card-muted);
-  color: #0f172a;
-}

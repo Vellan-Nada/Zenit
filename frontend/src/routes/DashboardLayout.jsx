@@ -4,8 +4,6 @@ import Sidebar from '../components/Sidebar.jsx';
 import DonationButton from '../components/DonationButton.jsx';
 import FeedbackButton from '../components/FeedbackButton.jsx';
 import FeedbackModal from '../components/FeedbackModal.jsx';
-import AnnouncementBanner from '../components/AnnouncementBanner.jsx';
-import PlanBadge from '../components/PlanBadge.jsx';
 import LoadingSpinner from '../components/LoadingSpinner.jsx';
 import { useAuth } from '../hooks/useAuth.js';
 import { fetchFeatures } from '../api/featureApi.js';
@@ -80,55 +78,36 @@ const DashboardLayout = () => {
           onManageSubscription={handleManageSubscription}
         />
         <main className={layoutStyles.contentArea}>
-          <div className={layoutStyles.panel}>
-            <div className={layoutStyles.topBar}>
-              <div className={layoutStyles.mobileToggle}>
-                <button
-                  type="button"
-                  className={layoutStyles.menuButton}
-                  onClick={() => setSidebarOpen((prev) => !prev)}
-                >
-                  ☰
-                </button>
+          <div className={layoutStyles.topRail}>
+            <div className={layoutStyles.mobileToggle}>
+              <button
+                type="button"
+                className={layoutStyles.menuButton}
+                onClick={() => setSidebarOpen((prev) => !prev)}
+              >
+                ☰
+              </button>
 
-                <h2 style={{ margin: 0, fontSize: '1.7rem' }}>
-                  Hey {(profile?.username || profile?.full_name || user?.email || 'there')} 👋
-                </h2>
-                <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-                  Everything you need for habits, notes, focus, and inspiration—organized in one calm space.
-                </p>
-              </div>
-              <div className={layoutStyles.topActions}>
-                <PlanBadge />
-                <DonationButton onDonate={handleDonate} />
-                <FeedbackButton onFeedback={handleFeedback} />
-                {planTier !== 'pro' && (
-                  <button
-                    type="button"
-                    className={layoutStyles.secondaryButton}
-                    onClick={handleUpgradeClick}
-                  >
-                    {planTier === 'plus' ? 'Go Pro' : 'See plans'}
-                  </button>
-                )}
-                {user ? (
-                  <>
-                    {planTier !== 'free' && (
-                      <button type="button" className={layoutStyles.secondaryButton} onClick={handleManageSubscription}>
-                        Manage subscription
-                      </button>
-                    )}
-                    <button type="button" className={layoutStyles.secondaryButton} onClick={signOut}>
-                      Log out
-                    </button>
-                  </>
-                ) : (
-                  <button type="button" className={layoutStyles.secondaryButton} onClick={() => navigate('/login')}>
-                    Log in
-                  </button>
-                )}
-              </div>
+              <h2 style={{ margin: 0, fontSize: '1.6rem' }}>
+                Hey {(profile?.username || profile?.full_name || user?.email || 'there')} 👋
+              </h2>
             </div>
+            <div className={layoutStyles.topActions}>
+              <DonationButton onDonate={handleDonate} />
+              <FeedbackButton onFeedback={handleFeedback} />
+              {user ? (
+                <button type="button" className={layoutStyles.secondaryButton} onClick={signOut}>
+                  Log out
+                </button>
+              ) : (
+                <button type="button" className={layoutStyles.secondaryButton} onClick={() => navigate('/login')}>
+                  Log in
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className={layoutStyles.panel}>
             {toast && (
               <div className="info-toast" style={{ marginBottom: '0.75rem', color: 'var(--text-muted)' }}>
                 {toast}{' '}
@@ -137,7 +116,6 @@ const DashboardLayout = () => {
                 </button>
               </div>
             )}
-            <AnnouncementBanner signedIn={Boolean(user)} />
             {authLoading ? (
               <LoadingSpinner label="Checking session…" />
             ) : (
