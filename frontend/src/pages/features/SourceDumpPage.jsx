@@ -1,36 +1,22 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabaseClient.js';
+import { useAuth } from '../../hooks/useAuth.js';
 import LoadingSpinner from '../../components/LoadingSpinner.jsx';
 import SourceDumpModal from '../../components/SourceDump/SourceDumpModal.jsx';
 import SourceCard from '../../components/SourceDump/SourceCard.jsx';
-import usePremiumStatus from '../../hooks/usePremiumStatus.js';
 import '../../styles/SourceDump.css';
 
 const SourceDumpPage = () => {
-  const [user, setUser] = useState(null);
+  const { user, profile, authLoading, profileLoading } = useAuth();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(null);
+  const isPremium = Boolean(profile?.is_premium) || ['plus', 'pro'].includes(profile?.plan);
 
   useEffect(() => {
-    const init = async () => {
-      const { data, error: authError } = await supabase.auth.getUser();
-      if (authError || !data?.user) {
-        setUser(null);
-        setLoading(false);
-        return;
-      }
-      setUser(data.user);
-    };
-    init();
-  }, []);
-
-  const { isPremium, loading: premiumLoading } = usePremiumStatus(user?.id);
-
-  useEffect(() => {
-    if (!user) return;
+    if (authLoading || profileLoading || !user) return;
     const fetchItems = async () => {
       setLoading(true);
       try {
@@ -50,7 +36,7 @@ const SourceDumpPage = () => {
       }
     };
     fetchItems();
-  }, [user]);
+  }, [authLoading, profileLoading, user]);
 
   const handleSave = async (payload) => {
     if (!user) return;
@@ -112,7 +98,7 @@ const SourceDumpPage = () => {
     setItems((prev) => prev.map((i) => (i.id === card.id ? data : i)));
   };
 
-  if (loading || premiumLoading) return <LoadingSpinner label="Loading source dump…" />;
+  if (authLoading || profileLoading || loading) return <LoadingSpinner label="Loading source dump…" />;
   if (!user) return <div className="sd-empty">Please log in to use Source Dump.</div>;
 
   return (
