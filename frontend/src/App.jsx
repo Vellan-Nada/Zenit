@@ -5,7 +5,7 @@ import HabitTrackerPage from './pages/features/HabitTrackerPage.jsx';
 import NotesPage from './pages/features/NotesPage.jsx';
 import TodoPage from './pages/features/TodoPage.jsx';
 import PomodoroPage from './pages/features/PomodoroPage.jsx';
-import ReadingListPage from './pages/features/ReadingListPage.jsx';
+import ReadingList from './pages/features/ReadingList.jsx';
 import WatchlistPage from './pages/features/WatchlistPage.jsx';
 import JournalingPage from './pages/features/JournalingPage.jsx';
 import SourceDumpPage from './pages/features/SourceDumpPage.jsx';
@@ -28,7 +28,7 @@ const App = () => {
             <Route path="notes" element={<NotesPage />} />
             <Route path="tasks" element={<TodoPage />} />
             <Route path="pomodoro" element={<PomodoroPage />} />
-            <Route path="reading" element={<ReadingListPage />} />
+            <Route path="reading" element={<ReadingList />} />
             <Route path="watch" element={<WatchlistPage />} />
             <Route path="journaling" element={<JournalingPage />} />
             <Route path="source-dump" element={<SourceDumpPage />} />
