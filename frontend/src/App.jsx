@@ -6,7 +6,7 @@ import NotesPage from './pages/features/NotesPage.jsx';
 import TodoPage from './pages/features/TodoPage.jsx';
 import PomodoroPage from './pages/features/PomodoroPage.jsx';
 import ReadingList from './pages/features/ReadingList.jsx';
-import WatchlistPage from './pages/features/WatchlistPage.jsx';
+import MovieSeriesPage from './pages/features/MovieSeriesPage.jsx';
 import JournalingPage from './pages/features/JournalingPage.jsx';
 import SourceDumpPage from './pages/features/SourceDumpPage.jsx';
 import AiHelperPage from './pages/features/AiHelperPage.jsx';
@@ -29,7 +29,7 @@ const App = () => {
             <Route path="tasks" element={<TodoPage />} />
             <Route path="pomodoro" element={<PomodoroPage />} />
             <Route path="reading" element={<ReadingList />} />
-            <Route path="watch" element={<WatchlistPage />} />
+            <Route path="watch" element={<MovieSeriesPage />} />
             <Route path="journaling" element={<JournalingPage />} />
             <Route path="source-dump" element={<SourceDumpPage />} />
             <Route path="ai-helper" element={<AiHelperPage />} />
