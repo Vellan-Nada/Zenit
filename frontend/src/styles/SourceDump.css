@@ -233,6 +233,15 @@
   border-radius: 0.8rem;
 }
 
+.sd-paste {
+  margin-top: 0.4rem;
+  border: 1px dashed var(--border);
+  border-radius: 0.8rem;
+  min-height: 80px;
+  padding: 0.6rem;
+  color: var(--text-muted);
+}
+
 .sd-shots .sd-shot-item {
   display: flex;
   flex-direction: column;

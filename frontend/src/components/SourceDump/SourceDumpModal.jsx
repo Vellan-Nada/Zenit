@@ -5,13 +5,14 @@ const EMPTY = {
   title: '',
   links: '',
   text_content: '',
-  screenshots: [],
+  screenshots: [], // store storage paths when bucket is private
 };
 
 const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSaved }) => {
   const [form, setForm] = useState(EMPTY);
   const [error, setError] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [pasteHint, setPasteHint] = useState('Paste images here');
 
   useEffect(() => {
     if (initialData) {
@@ -50,8 +51,7 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
             upsert: false,
           });
           if (uploadError) throw uploadError;
-          const { data } = supabase.storage.from('source-screenshots').getPublicUrl(path);
-          return data.publicUrl;
+          return path; // store path, not public URL, in private bucket
         })
       );
       setForm((prev) => ({ ...prev, screenshots: [...(prev.screenshots || []), ...uploads] }));
@@ -60,6 +60,26 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
       setError(err.message || 'Upload failed');
     } finally {
       setUploading(false);
+    }
+  };
+
+  const handlePaste = (event) => {
+    if (!isPremium) return;
+    const items = event.clipboardData?.items || [];
+    const files = [];
+    for (let i = 0; i < items.length; i += 1) {
+      const item = items[i];
+      if (item.type?.startsWith('image/')) {
+        const file = item.getAsFile();
+        if (file) files.push(file);
+      }
+    }
+    if (files.length) {
+      handleUpload(files);
+      setPasteHint('Images detected and uploading…');
+    } else {
+      setPasteHint('No images detected on clipboard.');
+      setTimeout(() => setPasteHint('Paste images here'), 1500);
     }
   };
 
@@ -102,14 +122,28 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
             <span>Screenshots</span>
             {isPremium ? (
               <div className="sd-upload">
-                <input type="file" accept="image/*" multiple disabled={uploading} onChange={(e) => handleUpload(e.target.files)} />
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  disabled={uploading}
+                  onChange={(e) => handleUpload(e.target.files)}
+                />
+                <div
+                  className="sd-paste"
+                  contentEditable
+                  suppressContentEditableWarning
+                  onPaste={handlePaste}
+                >
+                  {pasteHint}
+                </div>
                 {uploading && <p className="sd-muted">Uploading…</p>}
                 {form.screenshots?.length > 0 && (
                   <div className="sd-shots">
-                    {form.screenshots.map((url) => (
-                      <div key={url} className="sd-shot-item">
-                        <img src={url} alt="screenshot" />
-                        <button type="button" onClick={() => handleRemoveShot(url)}>Remove</button>
+                    {form.screenshots.map((path) => (
+                      <div key={path} className="sd-shot-item">
+                        <span className="sd-muted">{path}</span>
+                        <button type="button" onClick={() => handleRemoveShot(path)}>Remove</button>
                       </div>
                     ))}
                   </div>

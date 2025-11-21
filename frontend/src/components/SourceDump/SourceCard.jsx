@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { supabase } from '../../lib/supabaseClient.js';
 
 const COLOR_PRESETS = ['#f8fafc', '#e0f2fe', '#fef9c3', '#dcfce7', '#ffe4e6'];
 
 const SourceCard = ({ card, isPremium, onEdit, onDelete, onChangeColor }) => {
   const [colorMenu, setColorMenu] = useState(false);
   const [lockedMsg, setLockedMsg] = useState(false);
+  const [signedShots, setSignedShots] = useState([]);
 
   const links = (card.links || '')
     .split('\n')
@@ -12,6 +14,31 @@ const SourceCard = ({ card, isPremium, onEdit, onDelete, onChangeColor }) => {
     .filter(Boolean);
 
   const bg = isPremium && card.background_color ? card.background_color : '#fff';
+
+  useEffect(() => {
+    const resolveShots = async () => {
+      if (!isPremium || !card.screenshots?.length) {
+        setSignedShots([]);
+        return;
+      }
+      try {
+        const urls = await Promise.all(
+          card.screenshots.map(async (path) => {
+            const { data, error } = await supabase.storage
+              .from('source-screenshots')
+              .createSignedUrl(path, 3600);
+            if (error) throw error;
+            return data.signedUrl;
+          })
+        );
+        setSignedShots(urls);
+      } catch (err) {
+        console.error('Signed URL error', err);
+        setSignedShots([]);
+      }
+    };
+    resolveShots();
+  }, [card.screenshots, isPremium]);
 
   const handleColorClick = () => {
     if (!isPremium) {
@@ -47,11 +74,11 @@ const SourceCard = ({ card, isPremium, onEdit, onDelete, onChangeColor }) => {
             <p className="sd-text">{card.text_content}</p>
           </div>
         )}
-        {isPremium && card.screenshots?.length > 0 && (
+        {isPremium && signedShots.length > 0 && (
           <div className="sd-section">
             <strong>Screenshots</strong>
             <div className="sd-shots">
-              {card.screenshots.map((url) => (
+              {signedShots.map((url) => (
                 <a key={url} href={url} target="_blank" rel="noreferrer">
                   <img src={url} alt="screenshot" />
                 </a>
