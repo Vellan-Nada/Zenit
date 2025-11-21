@@ -4,6 +4,7 @@ import { useAuth } from '../../hooks/useAuth.js';
 import LoadingSpinner from '../../components/LoadingSpinner.jsx';
 import SourceDumpModal from '../../components/SourceDump/SourceDumpModal.jsx';
 import SourceCard from '../../components/SourceDump/SourceCard.jsx';
+import SourceDumpDetailModal from '../../components/SourceDump/SourceDumpDetailModal.jsx';
 import '../../styles/SourceDump.css';
 
 const SourceDumpPage = () => {
@@ -13,6 +14,7 @@ const SourceDumpPage = () => {
   const [error, setError] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(null);
+  const [detailItem, setDetailItem] = useState(null);
   const isPremium = Boolean(profile?.is_premium) || ['plus', 'pro'].includes(profile?.plan);
 
   useEffect(() => {
@@ -54,6 +56,7 @@ const SourceDumpPage = () => {
         .single();
       if (updateError) throw updateError;
       setItems((prev) => prev.map((i) => (i.id === activeItem.id ? data : i)));
+      setDetailItem(null);
     } else {
       const { data, error: insertError } = await supabase
         .from('source_dumps')
@@ -81,6 +84,7 @@ const SourceDumpPage = () => {
       return;
     }
     setItems((prev) => prev.filter((i) => i.id !== card.id));
+    setDetailItem(null);
   };
 
   const handleChangeColor = async (card, color) => {
@@ -125,10 +129,7 @@ const SourceDumpPage = () => {
               key={card.id}
               card={card}
               isPremium={isPremium}
-              onEdit={(c) => {
-                setActiveItem(c);
-                setModalOpen(true);
-              }}
+              onClick={(c) => setDetailItem(c)}
               onDelete={handleDelete}
               onChangeColor={handleChangeColor}
             />
@@ -146,6 +147,18 @@ const SourceDumpPage = () => {
           setActiveItem(null);
         }}
         onSaved={handleSave}
+      />
+
+      <SourceDumpDetailModal
+        card={detailItem}
+        isPremium={isPremium}
+        onClose={() => setDetailItem(null)}
+        onEdit={(c) => {
+          setActiveItem(c);
+          setModalOpen(true);
+          setDetailItem(null);
+        }}
+        onDelete={handleDelete}
       />
     </section>
   );

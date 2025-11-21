@@ -3,7 +3,7 @@ import { supabase } from '../../lib/supabaseClient.js';
 
 const COLOR_PRESETS = ['#f8fafc', '#e0f2fe', '#fef9c3', '#dcfce7', '#ffe4e6'];
 
-const SourceCard = ({ card, isPremium, onEdit, onDelete, onChangeColor }) => {
+const SourceCard = ({ card, isPremium, onChangeColor, onClick }) => {
   const [colorMenu, setColorMenu] = useState(false);
   const [lockedMsg, setLockedMsg] = useState(false);
   const [signedShots, setSignedShots] = useState([]);
@@ -54,7 +54,7 @@ const SourceCard = ({ card, isPremium, onEdit, onDelete, onChangeColor }) => {
       <div className="sd-card-header">
         <h3 title={card.title}>{card.title}</h3>
       </div>
-      <div className="sd-card-body">
+      <div className="sd-card-body" onClick={() => onClick?.(card)} role="button" tabIndex={0}>
         {links.length > 0 && (
           <div className="sd-section">
             <strong>Links</strong>
@@ -88,14 +88,6 @@ const SourceCard = ({ card, isPremium, onEdit, onDelete, onChangeColor }) => {
         )}
       </div>
       <div className="sd-card-actions">
-        <div className="sd-buttons">
-          <button type="button" className="sd-btn ghost" onClick={() => onEdit(card)}>
-            Edit
-          </button>
-          <button type="button" className="sd-btn danger" onClick={() => onDelete(card)}>
-            Delete
-          </button>
-        </div>
         <div className="sd-color-wrap">
           <button type="button" className="sd-color" onClick={handleColorClick} aria-label="Change background color">
             ●
