@@ -77,7 +77,6 @@ const SourceDumpPage = () => {
   };
 
   const handleDelete = async (card) => {
-    if (!window.confirm('Delete this source? This action cannot be undone.')) return;
     const { error: deleteError } = await supabase.from('source_dumps').delete().eq('id', card.id);
     if (deleteError) {
       alert('Unable to delete.');
