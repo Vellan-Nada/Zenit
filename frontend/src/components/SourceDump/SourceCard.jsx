@@ -107,11 +107,28 @@ const SourceCard = ({ card, isPremium, onChangeColor, onClick }) => {
             ●
           </button>
           {colorMenu && isPremium && (
-            <div className="sd-color-menu">
+            <div className="sd-color-menu" onClick={(e) => e.stopPropagation()}>
               {COLOR_PRESETS.map((c) => (
-                <button key={c} type="button" style={{ background: c }} onClick={() => { onChangeColor(card, c); setColorMenu(false); }} />
+                <button
+                  key={c}
+                  type="button"
+                  style={{ background: c }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onChangeColor(card, c);
+                    setColorMenu(false);
+                  }}
+                />
               ))}
-              <button type="button" style={{ background: '#fff', border: '1px solid var(--border)' }} onClick={() => { onChangeColor(card, null); setColorMenu(false); }}>
+              <button
+                type="button"
+                style={{ background: '#fff', border: '1px solid var(--border)' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onChangeColor(card, null);
+                  setColorMenu(false);
+                }}
+              >
                 Default
               </button>
             </div>
