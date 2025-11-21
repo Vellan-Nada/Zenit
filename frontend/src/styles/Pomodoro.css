@@ -92,8 +92,9 @@
 
 .timer-actions {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .pomodoro-cta {
