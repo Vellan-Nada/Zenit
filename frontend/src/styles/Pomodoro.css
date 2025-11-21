@@ -1,0 +1,212 @@
+.pomodoro-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pomodoro-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pomodoro-top-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pomodoro-btn {
+  border-radius: 0.8rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pomodoro-btn.primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.pomodoro-btn.ghost {
+  background: rgba(15, 23, 42, 0.08);
+  color: #0f172a;
+}
+
+.pomodoro-error {
+  color: var(--danger);
+}
+
+.pomodoro-empty {
+  padding: 1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.pomodoro-timer {
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.pomodoro-header h1 {
+  margin: 0;
+}
+
+.pomodoro-subtitle {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.pomodoro-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pomodoro-tab {
+  border-radius: 0.9rem;
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.9rem;
+  background: #fff;
+}
+
+.pomodoro-tab.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.timer-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.timer-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.pomodoro-cta {
+  border: none;
+  border-radius: 999px;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  background: #16a34a;
+}
+
+.pomodoro-cta.stop {
+  background: #dc2626;
+}
+
+.pomodoro-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.pomodoro-modal-content {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  width: min(640px, 90vw);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pomodoro-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pomodoro-close {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+}
+
+.pomodoro-form-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.pomodoro-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.pomodoro-form-grid input[type='number'] {
+  border-radius: 0.7rem;
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.7rem;
+}
+
+.pomodoro-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pomodoro-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.pomodoro-btn.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pomodoro-report-page,
+.pomodoro-report-upgrade {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.pomodoro-report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.pomodoro-card {
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  padding: 0.9rem;
+  background: #fff;
+}
+
+.pomodoro-metric {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.pomodoro-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-muted);
+}
