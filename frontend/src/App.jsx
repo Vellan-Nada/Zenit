@@ -9,7 +9,7 @@ import ReadingList from './pages/features/ReadingList.jsx';
 import MovieSeriesPage from './pages/features/MovieSeriesPage.jsx';
 import JournalingPage from './pages/features/JournalingPage.jsx';
 import SourceDumpPage from './pages/features/SourceDumpPage.jsx';
-import AiHelperPage from './pages/features/AiHelperPage.jsx';
+import AIDashboard from './pages/features/AIDashboard.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 import UpgradePage from './pages/UpgradePage.jsx';
 import UpgradeStatusPage from './pages/UpgradeStatusPage.jsx';
@@ -32,7 +32,7 @@ const App = () => {
             <Route path="watch" element={<MovieSeriesPage />} />
             <Route path="journaling" element={<JournalingPage />} />
             <Route path="source-dump" element={<SourceDumpPage />} />
-            <Route path="ai-helper" element={<AiHelperPage />} />
+            <Route path="ai" element={<AIDashboard />} />
             <Route path="upgrade" element={<UpgradePage />} />
             <Route path="upgrade/success" element={<UpgradeStatusPage status="success" />} />
             <Route path="upgrade/donation" element={<UpgradeStatusPage status="donation" />} />

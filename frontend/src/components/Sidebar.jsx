@@ -13,7 +13,7 @@ const navItems = [
   { label: 'Movie & Series', path: '/watch' },
   { label: 'Journaling', path: '/journaling' },
   { label: 'Source Dump', path: '/source-dump' },
-  { label: 'AI Helper', path: '/ai-helper' },
+  { label: 'AI Helper', path: '/ai' },
 ];
 
 const Sidebar = ({
