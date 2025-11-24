@@ -82,6 +82,11 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.habit-table.mobile-table {
+  table-layout: fixed;
+  min-width: 1050px;
+}
+
 .habit-table-fixed {
   flex: 0 0 auto;
   border-right: 1px solid var(--border);
@@ -125,9 +130,6 @@
   .dual-table {
     display: none;
   }
-  .habit-table {
-    min-width: 900px;
-  }
 }
 
 /* Subtle scrollbar styling for clarity */
@@ -159,6 +161,17 @@
 .habit-table td.sticky-dates {
   min-width: 70px;
   text-align: center;
+}
+
+/* Prevent header labels like Icon/Streak from squishing */
+.habit-table th.icon-col,
+.habit-table td.icon-col {
+  min-width: 80px;
+}
+
+.habit-table th.streak-col,
+.habit-table td.streak-col {
+  min-width: 90px;
 }
 
 .habit-table tbody tr:hover {

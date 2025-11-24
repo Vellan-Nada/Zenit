@@ -16,7 +16,7 @@ const HabitTable = ({
   const dateRowRefs = useRef([]);
 
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)');
+    const mq = window.matchMedia('(max-width: 1024px)');
     const handler = (e) => setIsMobile(e.matches);
     setIsMobile(mq.matches);
     mq.addEventListener('change', handler);
@@ -55,7 +55,7 @@ const HabitTable = ({
     return (
       <div className="habit-table-wrapper">
         <div className="habit-table-scroller mobile">
-          <table className="habit-table">
+          <table className="habit-table mobile-table">
             <thead>
               <tr>
                 <th>#</th>
