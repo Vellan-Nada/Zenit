@@ -16,7 +16,7 @@ const HabitTable = ({
   const dateRowRefs = useRef([]);
 
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 1024px)');
+    const mq = window.matchMedia('(max-width: 900px)');
     const handler = (e) => setIsMobile(e.matches);
     setIsMobile(mq.matches);
     mq.addEventListener('change', handler);
