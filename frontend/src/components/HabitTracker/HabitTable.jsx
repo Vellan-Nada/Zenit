@@ -18,10 +18,14 @@ const HabitTable = ({
     );
   }
 
+  // Set a dynamic table width so horizontal scrolling appears when many date columns exist
+  const tableMinWidth = Math.max(900, 600 + dates.length * 140);
+  const tableStyle = { minWidth: `${tableMinWidth}px`, width: `${tableMinWidth}px` };
+
   return (
     <div className="habit-table-wrapper">
       <div className="habit-table-scroller">
-        <table className="habit-table mobile-table">
+        <table className="habit-table mobile-table" style={tableStyle}>
           <thead>
             <tr>
               <th>#</th>
