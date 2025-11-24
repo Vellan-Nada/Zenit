@@ -22,13 +22,19 @@ const upsertSubscription = async ({ id, status, current_period_end, metadata, it
     return;
   }
 
+  // Some events (e.g., invoices) may not include current_period_end; skip if missing
+  if (!current_period_end) {
+    logger.warn('Missing current_period_end on subscription event, skipping premium update');
+    return;
+  }
+
   const plan =
     metadata?.tier ||
     items?.data?.[0]?.price?.lookup_key ||
     items?.data?.[0]?.price?.nickname ||
     'pro';
   const normalizedPlan = plan === 'plus' ? 'plus' : plan === 'pro' ? 'pro' : 'pro';
-  const expiresAtDate = new Date(current_period_end * 1000);
+  const expiresAtDate = new Date(Number(current_period_end) * 1000);
   const expiresAt = expiresAtDate.toISOString();
   const isWithinPaidPeriod = expiresAtDate.getTime() > Date.now();
 
@@ -172,6 +178,7 @@ export const handleStripeWebhook = async (req, res) => {
       }
       default:
         logger.info(`Unhandled Stripe event ${event.type}`);
+        break;
     }
 
     res.json({ received: true });

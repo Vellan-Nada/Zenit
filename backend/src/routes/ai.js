@@ -65,7 +65,7 @@ const getSummaryStats = async (userId) => {
   for (const key of Object.keys(ranges)) {
     const { from, to } = ranges[key];
     const fromISO = toISO(from);
-    const toISO = to.toISOString();
+    const toISODate = to.toISOString();
     const [
       completedTodos,
       habitsCompleted,
@@ -73,11 +73,11 @@ const getSummaryStats = async (userId) => {
       journalEntries,
       notesCreated,
     ] = await Promise.all([
-      countRange(TABLES.todos, 'id', userId, fromISO, toISO),
-      countRange(TABLES.habitLogs, 'id', userId, fromISO, toISO),
-      countRange(TABLES.pomodoro, 'id', userId, fromISO, toISO),
-      countRange(TABLES.journal, 'id', userId, fromISO, toISO),
-      countRange(TABLES.notes, 'id', userId, fromISO, toISO),
+      countRange(TABLES.todos, 'id', userId, fromISO, toISODate),
+      countRange(TABLES.habitLogs, 'id', userId, fromISO, toISODate),
+      countRange(TABLES.pomodoro, 'id', userId, fromISO, toISODate),
+      countRange(TABLES.journal, 'id', userId, fromISO, toISODate),
+      countRange(TABLES.notes, 'id', userId, fromISO, toISODate),
     ]);
 
     result[key] = {
