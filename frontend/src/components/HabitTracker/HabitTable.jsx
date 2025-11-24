@@ -19,8 +19,9 @@ const HabitTable = ({
   }
 
   // Set a dynamic table width so horizontal scrolling appears when many date columns exist
-  const tableMinWidth = Math.max(900, 700 + dates.length * 170);
-  const tableStyle = { minWidth: `${tableMinWidth}px`, width: `${tableMinWidth}px` };
+  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+  const computedWidth = Math.max(1600, viewportWidth + 400, 900 + dates.length * 180);
+  const tableStyle = { minWidth: `${computedWidth}px` };
 
   return (
     <div className="habit-table-wrapper">

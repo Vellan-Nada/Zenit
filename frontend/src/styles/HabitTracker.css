@@ -70,7 +70,7 @@
   background: #fff;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  overflow: visible;
+  overflow: hidden;
   width: 100%;
   max-width: 100%;
   padding-bottom: 0.35rem; /* space for scrollbar */
@@ -81,12 +81,13 @@
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   width: 100%;
+  display: block;
 }
 
 .habit-table {
   width: max-content;
   border-collapse: collapse;
-  min-width: 640px;
+  min-width: 1800px;
 }
 
 .habit-table.mobile-table {
