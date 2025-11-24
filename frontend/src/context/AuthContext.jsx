@@ -77,13 +77,13 @@ export const AuthProvider = ({ children }) => {
     return data;
   }, [loadProfile]);
 
-  const signUp = useCallback(async ({ email, password }) => {
+  const signUp = useCallback(async ({ email, password, username }) => {
     const { data, error: authError } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
-          username,
+          username: username || null,
         },
       },
     });
