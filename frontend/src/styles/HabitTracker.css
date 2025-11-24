@@ -73,44 +73,9 @@
   overflow: hidden;
 }
 
-.dual-table {
-  display: flex;
-}
-
-.habit-table-scroller.mobile {
+.habit-table-scroller {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-}
-
-.habit-table.mobile-table {
-  table-layout: fixed;
-  min-width: 1100px;
-}
-
-.habit-table-fixed {
-  flex: 0 0 auto;
-  border-right: 1px solid var(--border);
-}
-
-.habit-table-fixed .habit-table {
-  min-width: 420px;
-}
-
-.habit-table-dates {
-  flex: 1 1 auto;
-  overflow: hidden;
-}
-
-.habit-date-scroller {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.35rem; /* keep scrollbar visible */
-}
-
-.habit-table-dates .habit-table {
-  min-width: 100%;
 }
 
 .habit-table {
@@ -119,28 +84,27 @@
   min-width: 640px;
 }
 
+.habit-table.mobile-table {
+  table-layout: fixed;
+  min-width: 1100px;
+}
+
 /* Keep date scroller visible on smaller screens */
 @media (max-width: 900px) {
-  .habit-table-dates .habit-table {
+  .habit-table.mobile-table {
     min-width: 120%;
   }
 }
 
-@media (max-width: 640px) {
-  .dual-table {
-    display: none;
-  }
-}
-
 /* Subtle scrollbar styling for clarity */
-.habit-date-scroller::-webkit-scrollbar {
+.habit-table-scroller::-webkit-scrollbar {
   height: 10px;
 }
-.habit-date-scroller::-webkit-scrollbar-track {
+.habit-table-scroller::-webkit-scrollbar-track {
   background: #e5e7eb;
   border-radius: 999px;
 }
-.habit-date-scroller::-webkit-scrollbar-thumb {
+.habit-table-scroller::-webkit-scrollbar-thumb {
   background: #94a3b8;
   border-radius: 999px;
 }
