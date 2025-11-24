@@ -73,13 +73,14 @@
   overflow: hidden;
   width: 100%;
   max-width: 100%;
+  padding-bottom: 0.35rem; /* space for scrollbar */
 }
 
 .habit-table-scroller {
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   width: 100%;
-  padding-bottom: 0.35rem;
 }
 
 .habit-table {
