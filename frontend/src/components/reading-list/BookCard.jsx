@@ -50,17 +50,17 @@ const BookCard = ({ item, isPremium, onEdit, onDelete, onMove, onChangeColor }) 
                   type="button"
                   style={{ background: c }}
                   onClick={() => {
-                    onChangeColor(item, c);
-                    setColorOpen(false);
-                  }}
-                  aria-label={`Set color ${c}`}
-                />
-              ))}
+                  onChangeColor?.(item, c);
+                  setColorOpen(false);
+                }}
+                aria-label={`Set color ${c}`}
+              />
+            ))}
               <button
                 type="button"
                 style={{ background: '#fff', border: '1px solid var(--border)' }}
                 onClick={() => {
-                  onChangeColor(item, null);
+                  onChangeColor?.(item, null);
                   setColorOpen(false);
                 }}
                 aria-label="Reset color"

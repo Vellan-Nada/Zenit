@@ -1,6 +1,6 @@
 import BookCard from './BookCard.jsx';
 
-const StatusColumn = ({ title, statusId, items, onEdit, onDelete, onMove, onAdd, isPremium }) => {
+const StatusColumn = ({ title, statusId, items, onEdit, onDelete, onMove, onAdd, onChangeColor, isPremium }) => {
   return (
     <div className="reading-column">
       <div className="reading-column-header">
@@ -20,6 +20,7 @@ const StatusColumn = ({ title, statusId, items, onEdit, onDelete, onMove, onAdd,
               onEdit={onEdit}
               onDelete={onDelete}
               onMove={onMove}
+              onChangeColor={onChangeColor}
             />
           ))}
         </div>

@@ -85,6 +85,7 @@
 }
 
 .reading-card {
+  position: relative;
   border: 1px solid var(--border);
   border-radius: 0.9rem;
   padding: 0.75rem;
