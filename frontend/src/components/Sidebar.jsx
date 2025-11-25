@@ -26,7 +26,10 @@ const Sidebar = ({
 }) => {
   const { planTier, user } = useAuth();
   const [navItems, setNavItems] = useState(defaultNavItems);
-  const draggingPath = useRef(null);
+  const draggingPathRef = useRef(null);
+  const dragImageRef = useRef(null);
+  const [draggingPath, setDraggingPath] = useState(null);
+  const [dragOverPath, setDragOverPath] = useState(null);
   const [savingOrder, setSavingOrder] = useState(false);
 
   // Load custom order from profile.nav_order (json array of paths)
@@ -65,13 +68,33 @@ const Sidebar = ({
     }
   };
 
-  const handleDragStart = (path) => {
-    draggingPath.current = path;
+  const handleDragStart = (e, path) => {
+    draggingPathRef.current = path;
+    setDraggingPath(path);
+    setDragOverPath(null);
+    e.dataTransfer.effectAllowed = 'move';
+    // Build a custom drag image with the feature name
+    const box = document.createElement('div');
+    box.textContent = navItems.find((n) => n.path === path)?.label || '';
+    box.style.padding = '8px 12px';
+    box.style.background = 'rgba(59, 130, 246, 0.85)';
+    box.style.color = '#fff';
+    box.style.borderRadius = '10px';
+    box.style.boxShadow = '0 8px 18px rgba(15, 23, 42, 0.18)';
+    box.style.fontWeight = '600';
+    box.style.pointerEvents = 'none';
+    box.style.position = 'absolute';
+    box.style.top = '-1000px'; // keep offscreen
+    document.body.appendChild(box);
+    dragImageRef.current = box;
+    e.dataTransfer.setDragImage(box, box.offsetWidth / 2, box.offsetHeight / 2);
   };
 
   const handleDrop = (targetPath) => {
-    const sourcePath = draggingPath.current;
-    draggingPath.current = null;
+    const sourcePath = draggingPathRef.current;
+    draggingPathRef.current = null;
+    setDraggingPath(null);
+    setDragOverPath(null);
     if (!sourcePath || sourcePath === targetPath) return;
     const next = [...navItems];
     const fromIndex = next.findIndex((n) => n.path === sourcePath);
@@ -82,7 +105,20 @@ const Sidebar = ({
     persistOrder(next);
   };
 
-  const handleDragOver = (e) => e.preventDefault();
+  const handleDragOver = (path, e) => {
+    e.preventDefault();
+    if (dragOverPath !== path) setDragOverPath(path);
+  };
+
+  const handleDragEnd = () => {
+    draggingPathRef.current = null;
+    setDraggingPath(null);
+    setDragOverPath(null);
+    if (dragImageRef.current) {
+      document.body.removeChild(dragImageRef.current);
+      dragImageRef.current = null;
+    }
+  };
 
   const showUpgradeCta = planTier !== 'pro';
   const ctaTitle = planTier === 'plus' ? 'Ready for AI superpowers?' : 'Unlock EverDay Pro';
@@ -108,10 +144,13 @@ const Sidebar = ({
           {navItems.map((item) => (
             <div
               key={item.path}
-              className={styles.draggableItem}
+              className={`${styles.draggableItem} ${draggingPath === item.path ? styles.dragging : ''} ${
+                dragOverPath === item.path ? styles.dragOver : ''
+              }`}
               draggable
-              onDragStart={() => handleDragStart(item.path)}
-              onDragOver={handleDragOver}
+              onDragStart={(e) => handleDragStart(e, item.path)}
+              onDragOver={(e) => handleDragOver(item.path, e)}
+              onDragEnd={handleDragEnd}
               onDrop={() => handleDrop(item.path)}
               aria-label={`Reorder ${item.label}`}
             >
