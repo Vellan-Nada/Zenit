@@ -139,7 +139,6 @@ const Sidebar = ({
       </div>
 
       <div>
-        <div className={styles.navSectionTitle}>Workspace</div>
         <nav className={styles.nav} aria-label="Feature navigation">
           {navItems.map((item) => (
             <div
