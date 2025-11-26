@@ -25,7 +25,7 @@ const JournalEntryModal = ({ isOpen, dateKey, existingEntry, onSave, onDelete, o
       setIsEditing(true); // new entry: allow editing immediately
     }
     setError(null);
-  }, [existingEntry, dateKey]);
+  }, [existingEntry, dateKey, isOpen]);
 
   if (!isOpen) return null;
 

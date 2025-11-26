@@ -21,7 +21,7 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
       setForm(EMPTY);
     }
     setError(null);
-  }, [initialData]);
+  }, [initialData, isOpen]);
 
   if (!isOpen) return null;
 

@@ -18,7 +18,7 @@ const MovieItemModal = ({ isOpen, mode, initialValues, status, onClose, onSave }
       setForm(EMPTY_FORM);
     }
     setError(null);
-  }, [initialValues]);
+  }, [initialValues, isOpen]);
 
   if (!isOpen) return null;
 

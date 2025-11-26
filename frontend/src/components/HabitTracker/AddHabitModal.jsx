@@ -13,7 +13,7 @@ const AddHabitModal = ({ open, onClose, onSubmit, initialHabit, isPremium, limit
     } else {
       setForm(defaultState);
     }
-  }, [initialHabit]);
+  }, [initialHabit, open]);
 
   if (!open) return null;
 

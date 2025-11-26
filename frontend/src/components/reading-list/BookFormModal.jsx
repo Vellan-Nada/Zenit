@@ -18,7 +18,7 @@ const BookFormModal = ({ isOpen, mode, initialValues, defaultStatus, isPremium, 
       setForm({ ...DEFAULT_FORM, status: defaultStatus });
     }
     setError(null);
-  }, [initialValues, defaultStatus]);
+  }, [initialValues, defaultStatus, isOpen]);
 
   if (!isOpen) return null;
 
