@@ -19,7 +19,6 @@ const JournalHeader = ({ month, year, onMonthChange, onYearChange, onReport }) =
   return (
     <div className="journal-header">
       <div>
-        <p className="journal-subtitle">Capture your day, one entry at a time.</p>
         <h1>Journal</h1>
       </div>
       <div className="journal-controls">

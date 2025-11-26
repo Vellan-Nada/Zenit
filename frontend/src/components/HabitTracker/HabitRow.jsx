@@ -9,7 +9,6 @@ const HabitRow = ({
   onToggleStatus,
   onEdit,
   onDelete,
-  mode = 'full', // full | fixed | dates
   rowRef,
 }) => {
   const renderFixedCols = () => (
@@ -30,18 +29,16 @@ const HabitRow = ({
           </button>
         </div>
       </td>
-      {showIcons && (
-        <td className="icon-col">
-          <span className="habit-icon">{getIconSymbol(habit.icon_key) || '📌'}</span>
-        </td>
-      )}
-      {showStreak && (
-        <td className="streak-col">
+      <td className="icon-col">
+        {showIcons && <span className="habit-icon">{getIconSymbol(habit.icon_key) || '📌'}</span>}
+      </td>
+      <td className="streak-col">
+        {showStreak && (
           <span title={`Current: ${habit.currentStreak} • Best: ${habit.best_streak}`}>
             {habit.currentStreak}-day
           </span>
-        </td>
-      )}
+        )}
+      </td>
     </>
   );
 
@@ -89,15 +86,6 @@ const HabitRow = ({
       );
     });
 
-  if (mode === 'fixed') {
-    return <tr ref={rowRef}>{renderFixedCols()}</tr>;
-  }
-
-  if (mode === 'dates') {
-    return <tr ref={rowRef}>{renderDateCols()}</tr>;
-  }
-
-  // Default: full row
   return (
     <tr ref={rowRef}>
       {renderFixedCols()}

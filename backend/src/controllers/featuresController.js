@@ -1,11 +1,11 @@
 const FEATURE_PLACEHOLDERS = {
   habits: {
     title: 'Habit Tracker',
-    description: 'Track streaks, completions, and routines. Detailed config coming soon.',
+    description: 'Track habits, completions, and streaks.',
   },
   notes: {
     title: 'Notes',
-    description: 'Capture quick notes, organize by tags, and sync to Supabase.',
+    description: 'Capture quick notes.',
   },
   todos: {
     title: 'To Do List',
@@ -13,15 +13,15 @@ const FEATURE_PLACEHOLDERS = {
   },
   pomodoro: {
     title: 'Pomodoro',
-    description: 'Timer with customizable focus/break sessions.',
+    description: 'Pomodoro with customizable focus/break sessions.',
   },
   reading: {
     title: 'Reading List',
-    description: 'Save books/articles with status, ratings, and highlights.',
+    description: 'Keep track of your books.',
   },
   watch: {
     title: 'Movie & Series List',
-    description: 'Keep track of shows and movies you have watched or plan to watch.',
+    description: 'Keep track of your movies and series.',
   },
   journaling: {
     title: 'Journaling',

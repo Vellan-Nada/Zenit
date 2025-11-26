@@ -184,7 +184,6 @@ const TodoPage = () => {
     <section className="todo-page">
       <header className="todo-page-header">
         <div>
-          <p className="todo-subtitle">Plan the work. Crush the goals.</p>
           <h1>To-Do & Goals</h1>
         </div>
       </header>

@@ -20,6 +20,7 @@ const SourceDumpPage = () => {
   const guestMode = !user;
   const isPremium = guestMode ? false : Boolean(profile?.is_premium) || ['plus', 'pro'].includes(profile?.plan);
   const FREE_LIMIT = 7;
+  const limitReached = !isPremium && items.length >= FREE_LIMIT;
 
   useEffect(() => {
     if (authLoading || profileLoading) return;
@@ -51,7 +52,7 @@ const SourceDumpPage = () => {
   }, [authLoading, profileLoading, user]);
 
   const handleSave = async (payload) => {
-    const isFreeLimitReached = !isPremium && items.length >= FREE_LIMIT;
+    const isFreeLimitReached = limitReached && !activeItem;
     if (isFreeLimitReached) {
       throw new Error(`Free plan limit reached (${FREE_LIMIT} items). Upgrade to add more.`);
     }
@@ -161,10 +162,8 @@ const SourceDumpPage = () => {
     <section className="sd-page">
       <div className="sd-header">
         <div>
-          <p className="sd-subtitle">Use Source Dump to store links, notes, and screenshots related to your work.</p>
           <h1>Source dump</h1>
         </div>
-        <div className="sd-info" title="Use Source Dump to store links, notes, and screenshots related to your work.">i</div>
       </div>
       {!user && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>
@@ -175,7 +174,19 @@ const SourceDumpPage = () => {
         </div>
       )}
       <div className="sd-actions">
-        <button type="button" className="sd-btn primary" onClick={() => { setActiveItem(null); setModalOpen(true); }}>
+        <button
+          type="button"
+          className="sd-btn primary"
+          onClick={() => {
+            if (limitReached) {
+              setError(`Free plan limit reached (${FREE_LIMIT} items). Upgrade to add more.`);
+              return;
+            }
+            setError(null);
+            setActiveItem(null);
+            setModalOpen(true);
+          }}
+        >
           + Add source
         </button>
       </div>

@@ -205,12 +205,8 @@ const NotesPage = () => {
     <section className="notes-page">
       <header className="notes-header">
         <div>
-          <p className="notes-subtitle">Brain dump, scratchpad, plan-of-attack.</p>
           <h1>Notes</h1>
         </div>
-        <button type="button" className="info-btn" title="Notes live inside your EverDay workspace.">
-          i
-        </button>
       </header>
 
       {!user && (

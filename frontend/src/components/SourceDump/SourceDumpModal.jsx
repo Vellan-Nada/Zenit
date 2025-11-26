@@ -35,7 +35,11 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
       return;
     }
     setError(null);
-    await onSaved(form);
+    try {
+      await onSaved(form);
+    } catch (err) {
+      setError(err.message || 'Unable to save');
+    }
   };
 
   const handleUpload = async (files) => {

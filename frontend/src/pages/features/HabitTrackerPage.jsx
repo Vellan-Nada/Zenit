@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabaseClient.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useGuest } from '../../context/GuestContext.jsx';
+import ColorPickerPopover from '../../components/Todos/ColorPickerPopover.jsx';
+import UpgradeToPremium from '../../components/Notes/UpgradeToPremium.jsx';
 import HabitTable from '../../components/HabitTracker/HabitTable.jsx';
 import AddHabitModal from '../../components/HabitTracker/AddHabitModal.jsx';
 import StreakSummaryCard from '../../components/HabitTracker/StreakSummaryCard.jsx';
@@ -68,10 +70,11 @@ const HabitTrackerPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showIcons, setShowIcons] = useState(true);
-  const [showStreak, setShowStreak] = useState(true);
+  const [showStreak, setShowStreak] = useState(false);
   const [modalState, setModalState] = useState({ open: false, habit: null });
   const [limitReached, setLimitReached] = useState(false);
   const [dates, setDates] = useState([]);
+  const [streakPromptVisible, setStreakPromptVisible] = useState(false);
 
   const recompute = useCallback(
     (habitRows, logs, premiumFlag) => {
@@ -252,7 +255,8 @@ const HabitTrackerPage = () => {
 
   const handleRestoreHabit = async (habit) => {
     if (guestMode) {
-      const nextHabits = habits.map((h) => (h.id === habit.id ? { ...h, is_deleted: false } : h));
+      const combined = [...habits, ...history];
+      const nextHabits = combined.map((h) => (h.id === habit.id ? { ...h, is_deleted: false } : h));
       setGuestData((prev) => ({ ...prev, habits: nextHabits, habitLogs: logMap }));
       recompute(nextHabits, logMap, false);
       return;
@@ -296,25 +300,10 @@ const HabitTrackerPage = () => {
       <div className="habit-header">
         <div>
           <h1>Habit Tracker</h1>
-          <p style={{ color: 'var(--text-muted)' }}>Track your streaks and daily progress.</p>
         </div>
         <button type="button" onClick={() => setModalState({ open: true, habit: null })} disabled={limitReached}>
           + Add Habit
         </button>
-      </div>
-
-      <div className="habit-subheader">
-        {isPremium && (
-          <label>
-            <input type="checkbox" checked={showStreak} onChange={() => setShowStreak((prev) => !prev)} />
-            Streak
-          </label>
-        )}
-        <label>
-          <input type="checkbox" checked={showIcons} onChange={() => setShowIcons((prev) => !prev)} />
-          Icons
-        </label>
-        <span className="habit-info">i</span>
       </div>
 
       {!user && (
@@ -326,11 +315,62 @@ const HabitTrackerPage = () => {
         </div>
       )}
 
+      <div className="habit-subheader">
+        <div className="habit-subheader-right">
+          <div className="streak-lock">
+            {!isPremium ? (
+              <div className="streak-lock-wrapper">
+                <button
+                  type="button"
+                  className="streak-lock-btn"
+                  onClick={() => setStreakPromptVisible((prev) => !prev)}
+                >
+                  🔒
+                </button>
+                <span>Streak</span>
+                {streakPromptVisible && (
+                  <div className="streak-lock-pop">
+                    <p style={{ marginTop: 0, marginBottom: '0.75rem', textAlign: 'left' }}>
+                      Streaks are a premium feature.
+                    </p>
+                    <div className="streak-pop-actions">
+                      <UpgradeToPremium cta="Upgrade" variant="full" />
+                      <button
+                        type="button"
+                        className="secondaryButton"
+                        onClick={() => setStreakPromptVisible(false)}
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <span>Streak</span>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={showStreak}
+                    onChange={() => setShowStreak((prev) => !prev)}
+                  />
+                </label>
+              </>
+            )}
+          </div>
+          <label>
+            <input type="checkbox" checked={showIcons} onChange={() => setShowIcons((prev) => !prev)} />
+            Icons
+          </label>
+        </div>
+      </div>
+
       <HabitTable
         habits={habits}
         dates={dates}
         showIcons={showIcons}
-        showStreak={showStreak}
+        showStreak={isPremium ? showStreak : false}
         isPremium={isPremium}
         onToggleStatus={handleToggleStatus}
         onEditHabit={(habit) => setModalState({ open: true, habit })}

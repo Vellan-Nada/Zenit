@@ -11,14 +11,6 @@ const HabitTable = ({
   onEditHabit,
   onDeleteHabit,
 }) => {
-  if (!habits.length) {
-    return (
-      <div className="habit-empty">
-        <p>No habits yet. Click “Add Habit” to start tracking.</p>
-      </div>
-    );
-  }
-
   const scrollerRef = useRef(null);
   const [tableWidth, setTableWidth] = useState(1200);
 
@@ -50,8 +42,8 @@ const HabitTable = ({
               <th>#</th>
               <th className="habit-col">Habit</th>
               <th className="actions-col">Actions</th>
-              {showIcons && <th className="icon-col">Icon</th>}
-              {showStreak && isPremium && <th className="streak-col">Streak</th>}
+              <th className="icon-col">{showIcons ? 'Icon' : ''}</th>
+              <th className="streak-col">{showStreak ? 'Streak' : ''}</th>
               {dates.map((date) => (
                 <th key={date.iso} className="sticky-dates">
                   {date.label}
@@ -60,19 +52,27 @@ const HabitTable = ({
             </tr>
           </thead>
           <tbody>
-            {habits.map((habit, index) => (
-              <HabitRow
-                key={habit.id}
-                index={index}
-                habit={habit}
-                dates={dates}
-                showIcons={showIcons}
-                showStreak={showStreak && isPremium}
-                onToggleStatus={onToggleStatus}
-                onEdit={onEditHabit}
-                onDelete={onDeleteHabit}
-              />
-            ))}
+            {habits.length === 0 ? (
+              <tr>
+                <td colSpan={3 + dates.length + 2} style={{ textAlign: 'center', padding: '1.5rem' }}>
+                  No habits yet. Click “Add Habit” to start tracking.
+                </td>
+              </tr>
+            ) : (
+              habits.map((habit, index) => (
+                <HabitRow
+                  key={habit.id}
+                  index={index}
+                  habit={habit}
+                  dates={dates}
+                  showIcons={showIcons}
+                  showStreak={showStreak}
+                  onToggleStatus={onToggleStatus}
+                  onEdit={onEditHabit}
+                  onDelete={onDeleteHabit}
+                />
+              ))
+            )}
           </tbody>
         </table>
       </div>

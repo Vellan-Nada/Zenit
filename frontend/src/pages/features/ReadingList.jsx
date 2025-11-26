@@ -210,7 +210,6 @@ const ReadingList = () => {
     <section className="reading-page">
       <header className="reading-header">
         <div>
-          <p className="reading-subtitle">Track books across your journey.</p>
           <h1>Reading List</h1>
         </div>
       </header>
