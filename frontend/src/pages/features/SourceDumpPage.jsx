@@ -7,6 +7,7 @@ import SourceDumpModal from '../../components/SourceDump/SourceDumpModal.jsx';
 import SourceCard from '../../components/SourceDump/SourceCard.jsx';
 import SourceDumpDetailModal from '../../components/SourceDump/SourceDumpDetailModal.jsx';
 import '../../styles/SourceDump.css';
+import { goToSignup } from '../../utils/guestSignup.js';
 
 const SourceDumpPage = () => {
   const { user, profile, authLoading, profileLoading } = useAuth();
@@ -168,7 +169,10 @@ const SourceDumpPage = () => {
       {!user && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>
           You’re in guest mode. Source Dumps won’t be saved if you leave.{' '}
-          <button type="button" onClick={() => (window.location.href = '/signup')}>
+          <button
+            type="button"
+            onClick={() => goToSignup(guestData)}
+          >
             Sign up
           </button>
         </div>

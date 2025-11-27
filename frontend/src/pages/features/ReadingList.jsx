@@ -6,6 +6,7 @@ import LoadingSpinner from '../../components/LoadingSpinner.jsx';
 import StatusColumn from '../../components/reading-list/StatusColumn.jsx';
 import BookFormModal from '../../components/reading-list/BookFormModal.jsx';
 import '../../styles/ReadingList.css';
+import { goToSignup } from '../../utils/guestSignup.js';
 
 const STATUS_LABELS = {
   want_to_read: 'Books want to read',
@@ -86,8 +87,9 @@ const ReadingList = () => {
   };
 
   const handleSave = async (values) => {
+    const status = values.status || defaultStatus;
     // enforce free limit per status
-    const countForStatus = grouped[values.status]?.length || 0;
+    const countForStatus = grouped[status]?.length || 0;
     const isFreeLimitReached = !isPremium && countForStatus >= FREE_LIMIT_PER_STATUS;
     if (isFreeLimitReached) {
       throw new Error(`Free plan limit reached (${FREE_LIMIT_PER_STATUS} items). Upgrade to add more.`);
@@ -97,6 +99,7 @@ const ReadingList = () => {
       if (modalMode === 'create') {
         const newItem = {
           ...values,
+          status,
           id: crypto.randomUUID(),
           user_id: null,
           created_at: new Date().toISOString(),
@@ -105,7 +108,7 @@ const ReadingList = () => {
         setItems((prev) => [...prev, newItem]);
         setGuestData((prev) => ({ ...prev, readingList: [...(prev.readingList || []), newItem] }));
       } else if (activeItem) {
-        const updated = { ...activeItem, ...values, updated_at: new Date().toISOString() };
+        const updated = { ...activeItem, ...values, status, updated_at: new Date().toISOString() };
         setItems((prev) => prev.map((item) => (item.id === activeItem.id ? updated : item)));
         setGuestData((prev) => ({
           ...prev,
@@ -114,7 +117,7 @@ const ReadingList = () => {
       }
     } else if (user) {
       if (modalMode === 'create') {
-        const payload = { ...values, user_id: user.id };
+        const payload = { ...values, status, user_id: user.id };
         const { data, error: insertError } = await supabase
           .from('reading_list_items')
           .insert(payload)
@@ -125,7 +128,7 @@ const ReadingList = () => {
       } else if (activeItem) {
         const { data, error: updateError } = await supabase
           .from('reading_list_items')
-          .update(values)
+          .update({ ...values, status })
           .eq('id', activeItem.id)
           .select()
           .single();
@@ -216,7 +219,12 @@ const ReadingList = () => {
       {!user && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>
           You’re in guest mode. Your reading list won’t be saved if you leave.{' '}
-          <button type="button" onClick={() => (window.location.href = '/signup')}>
+          <button
+            type="button"
+            onClick={() => {
+              goToSignup(guestData);
+            }}
+          >
             Sign up
           </button>
         </div>

@@ -6,7 +6,7 @@ const WelcomePage = () => {
   return (
     <article style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <header style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-        <h1 style={{ marginBottom: 0, fontSize: '2rem' }}>Welcome to EverDay</h1>
+        <h1 style={{ marginBottom: 0, fontSize: '1.6rem' }}>Welcome to EverDay</h1>
         <p style={{ color: 'var(--text-muted)', maxWidth: '720px' }}>
           EverDay unifies your habits, notes, todos, focus cycles, inspiration and thoughts into one calm workspace.
           Use the navigation to explore each tool. Your data is saved when you sign in.

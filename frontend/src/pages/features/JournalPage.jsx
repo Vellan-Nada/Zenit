@@ -9,6 +9,7 @@ import JournalEntryModal from '../../components/Journal/JournalEntryModal.jsx';
 import JournalReport from '../../components/Journal/JournalReport.jsx';
 import PremiumUpsell from '../../components/Journal/PremiumUpsell.jsx';
 import '../../styles/Journal.css';
+import { goToSignup } from '../../utils/guestSignup.js';
 
 const JournalPage = () => {
   const { user, profile, authLoading, profileLoading } = useAuth();
@@ -194,7 +195,10 @@ const JournalPage = () => {
       {!user && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>
           You’re in guest mode. Journal entries won’t be saved if you leave.{' '}
-          <button type="button" onClick={() => (window.location.href = '/signup')}>
+          <button
+            type="button"
+            onClick={() => goToSignup(guestData)}
+          >
             Sign up
           </button>
         </div>

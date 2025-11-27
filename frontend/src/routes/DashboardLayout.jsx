@@ -89,6 +89,7 @@ const DashboardLayout = () => {
       (guestData.sourceDumps && guestData.sourceDumps.length > 0);
     if (!hasGuestData) return;
     const handler = (e) => {
+      if (window.__suppressLeaveWarning) return;
       e.preventDefault();
       e.returnValue = '';
     };

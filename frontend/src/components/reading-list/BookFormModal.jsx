@@ -4,18 +4,17 @@ const DEFAULT_FORM = {
   title: '',
   author: '',
   notes: '',
-  status: 'want_to_read',
 };
 
 const BookFormModal = ({ isOpen, mode, initialValues, defaultStatus, isPremium, onClose, onSave }) => {
-  const [form, setForm] = useState({ ...DEFAULT_FORM, status: defaultStatus });
+  const [form, setForm] = useState({ ...DEFAULT_FORM });
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (initialValues) {
       setForm({ ...DEFAULT_FORM, ...initialValues });
     } else {
-      setForm({ ...DEFAULT_FORM, status: defaultStatus });
+      setForm({ ...DEFAULT_FORM });
     }
     setError(null);
   }, [initialValues, defaultStatus, isOpen]);
@@ -33,11 +32,12 @@ const BookFormModal = ({ isOpen, mode, initialValues, defaultStatus, isPremium, 
       return;
     }
     setError(null);
+    const resolvedStatus = initialValues?.status || defaultStatus || form.status;
     onSave({
       title: form.title || null,
       author: form.author || null,
       notes: form.notes || null,
-      status: form.status,
+      status: resolvedStatus,
     });
   };
 
@@ -60,14 +60,6 @@ const BookFormModal = ({ isOpen, mode, initialValues, defaultStatus, isPremium, 
           <label className="reading-full">
             <span>Notes</span>
             <textarea rows={4} value={form.notes} onChange={(e) => handleChange('notes', e.target.value)} />
-          </label>
-          <label>
-            <span>Status</span>
-            <select value={form.status} onChange={(e) => handleChange('status', e.target.value)}>
-              <option value="want_to_read">Books want to read</option>
-              <option value="reading">Books reading</option>
-              <option value="finished">Books have been read</option>
-            </select>
           </label>
         </div>
         {error && <p className="reading-error">{error}</p>}

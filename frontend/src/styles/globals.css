@@ -4,7 +4,8 @@
   background-color: #f4f6f8;
   line-height: 1.5;
   font-weight: 400;
-  --sidebar-width: 260px;
+  font-size: 15px;
+  --sidebar-width: 230px;
   --accent: #1d4ed8;
   --accent-muted: rgba(29, 78, 216, 0.12);
   --card-bg: #ffffff;
@@ -31,6 +32,22 @@ body {
   color: #0f172a;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 0.6rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin: 0 0 0.4rem;
 }
 
 a {

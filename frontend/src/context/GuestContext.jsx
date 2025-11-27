@@ -3,17 +3,22 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 const GuestContext = createContext(null);
 
 export const GuestProvider = ({ children }) => {
-  const [guestData, setGuestData] = useState({});
+  const [guestData, setGuestData] = useState(() => {
+    try {
+      const stored = sessionStorage.getItem('everday_guest_data');
+      return stored ? JSON.parse(stored) : {};
+    } catch {
+      return {};
+    }
+  });
 
   useEffect(() => {
-    // Clean up any legacy persisted guest data so reload/exit always clears state
     try {
-      localStorage.removeItem('everday_guest_data');
-      sessionStorage.removeItem('everday_guest_data');
-    } catch (err) {
-      // ignore
+      sessionStorage.setItem('everday_guest_data', JSON.stringify(guestData));
+    } catch {
+      // ignore persistence failures
     }
-  }, []);
+  }, [guestData]);
 
   const value = useMemo(
     () => ({

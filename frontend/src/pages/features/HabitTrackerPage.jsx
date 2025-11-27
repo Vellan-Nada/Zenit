@@ -9,6 +9,7 @@ import AddHabitModal from '../../components/HabitTracker/AddHabitModal.jsx';
 import StreakSummaryCard from '../../components/HabitTracker/StreakSummaryCard.jsx';
 import HistoryList from '../../components/HabitTracker/HistoryList.jsx';
 import '../../styles/HabitTracker.css';
+import { goToSignup } from '../../utils/guestSignup.js';
 
 const buildDateRangeFrom = (startDate) => {
   if (!startDate) return [];
@@ -309,7 +310,10 @@ const HabitTrackerPage = () => {
       {!user && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>
           You’re in guest mode. Habits won’t be saved if you leave.{' '}
-          <button type="button" onClick={() => (window.location.href = '/signup')}>
+          <button
+            type="button"
+            onClick={() => goToSignup(guestData)}
+          >
             Sign up
           </button>
         </div>

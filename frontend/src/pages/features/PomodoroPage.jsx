@@ -6,6 +6,7 @@ import PomodoroTimer from '../../components/Pomodoro/PomodoroTimer.jsx';
 import PomodoroSettings from '../../components/Pomodoro/PomodoroSettings.jsx';
 import ReportCards from '../../components/Pomodoro/ReportCards.jsx';
 import '../../styles/Pomodoro.css';
+import { goToSignup } from '../../utils/guestSignup.js';
 
 const DEFAULT_SETTINGS = {
   pomodoro_minutes: 20,
@@ -453,7 +454,7 @@ const PomodoroPage = () => {
       {guestMode && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>
           You’re in guest mode. Pomodoro sessions won’t be saved if you leave.{' '}
-          <button type="button" onClick={() => (window.location.href = '/signup')}>
+          <button type="button" onClick={() => goToSignup(null)}>
             Sign up
           </button>
         </div>

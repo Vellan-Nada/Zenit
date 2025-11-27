@@ -5,6 +5,7 @@ import { useGuest } from '../../context/GuestContext.jsx';
 import TodoSection from '../../components/Todos/TodoSection.jsx';
 import LoadingSpinner from '../../components/LoadingSpinner.jsx';
 import '../../styles/Todos.css';
+import { goToSignup } from '../../utils/guestSignup.js';
 
 const SECTION_CONFIG = [
   { type: 'task', label: 'To Do', limit: 10 },
@@ -190,7 +191,10 @@ const TodoPage = () => {
       {!user && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>
           You’re in guest mode. Tasks won’t be saved if you leave.{' '}
-          <button type="button" onClick={() => (window.location.href = '/signup')}>
+          <button
+            type="button"
+            onClick={() => goToSignup(guestData)}
+          >
             Sign up
           </button>
         </div>

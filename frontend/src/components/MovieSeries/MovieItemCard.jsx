@@ -8,18 +8,12 @@ const STATUS_OPTIONS = [
 
 const COLOR_PRESETS = ['#fff7ed', '#eef2ff', '#ecfeff', '#f1f5f9', '#fef9c3', '#e0f2fe'];
 
-const DEFAULT_STATUS_BG = {
-  to_watch: '#f8fafc',
-  watching: '#fff7ed',
-  watched: '#fff1f2',
-};
-
 const MovieItemCard = ({ item, isPremium, onEdit, onDelete, onMove, onChangeColor }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [colorOpen, setColorOpen] = useState(false);
   const [lockedMessage, setLockedMessage] = useState(false);
 
-  const bg = item.card_color || DEFAULT_STATUS_BG[item.status] || '#fff';
+  const bg = item.card_color ?? '#ffffffff';
 
   const handleColorClick = () => {
     if (!isPremium) {

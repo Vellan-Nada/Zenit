@@ -6,6 +6,7 @@ import LoadingSpinner from '../LoadingSpinner.jsx';
 import MovieItemModal from './MovieItemModal.jsx';
 import MovieItemCard from './MovieItemCard.jsx';
 import '../../styles/MovieSeries.css';
+import { goToSignup } from '../../utils/guestSignup.js';
 
 const STATUS_LABELS = {
   to_watch: 'Movie / Series to watch',
@@ -229,7 +230,7 @@ const MovieSeriesList = () => {
       {!user && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>
           You’re in guest mode. This list won’t be saved if you leave.{' '}
-          <button type="button" onClick={() => (window.location.href = '/signup')}>
+          <button type="button" onClick={() => goToSignup(guestData)}>
             Sign up
           </button>
         </div>

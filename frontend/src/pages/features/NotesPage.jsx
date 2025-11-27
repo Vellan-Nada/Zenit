@@ -7,6 +7,7 @@ import NotesGrid from '../../components/Notes/NotesGrid.jsx';
 import UpgradeToPremium from '../../components/Notes/UpgradeToPremium.jsx';
 import LoadingSpinner from '../../components/LoadingSpinner.jsx';
 import '../../styles/Notes.css';
+import { goToSignup } from '../../utils/guestSignup.js';
 
 const FREE_NOTE_LIMIT = 15;
 
@@ -211,7 +212,13 @@ const NotesPage = () => {
 
       {!user && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>
-          You’re in guest mode. Notes won’t be saved if you leave. <button type="button" onClick={() => (window.location.href = '/signup')}>Sign up</button>
+          You’re in guest mode. Notes won’t be saved if you leave.{' '}
+          <button
+            type="button"
+            onClick={() => goToSignup(guestData)}
+          >
+            Sign up
+          </button>
         </div>
       )}
 
