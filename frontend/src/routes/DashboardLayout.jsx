@@ -79,6 +79,31 @@ const DashboardLayout = () => {
     }
   };
 
+  const handleQuickUpgrade = async () => {
+    // Guest -> signup
+    if (!user) {
+      navigate('/signup');
+      return;
+    }
+    // Free members -> start Plus checkout directly
+    if (planTier === 'free') {
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+      try {
+        const { url } = await createCheckoutSession('plus', token);
+        window.location.href = url;
+        return;
+      } catch (err) {
+        console.error('Upgrade failed', err);
+        setToast(err.message || 'Unable to start upgrade checkout');
+      }
+    }
+    // Fallback to upgrade page
+    navigate('/upgrade');
+  };
+
   const handleUpgradeClick = () => {
     navigate('/upgrade');
   };
@@ -151,11 +176,20 @@ const DashboardLayout = () => {
               <h2 style={{ margin: 0, fontSize: '1.6rem' }}>
                 Hey {(profile?.username || profile?.full_name || user?.user_metadata?.username || user?.user_metadata?.full_name || 'there')} 👋
               </h2>
-            </div>
-            <div className={layoutStyles.topActions}>
-              <DonationButton onDonate={handleDonate} />
-              <FeedbackButton onFeedback={handleFeedback} />
-              {user ? (
+          </div>
+          <div className={layoutStyles.topActions}>
+            {(!user || planTier === 'free') && (
+              <button
+                type="button"
+                className={layoutStyles.secondaryButton}
+                onClick={handleQuickUpgrade}
+              >
+                Upgrade
+              </button>
+            )}
+            <DonationButton onDonate={handleDonate} />
+            <FeedbackButton onFeedback={handleFeedback} />
+            {user ? (
                 <button type="button" className={layoutStyles.secondaryButton} onClick={signOut}>
                   Log out
                 </button>
