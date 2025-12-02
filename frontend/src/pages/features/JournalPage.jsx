@@ -13,6 +13,9 @@ import { createCheckoutSession } from '../../api/billingApi.js';
 import { useNavigate } from 'react-router-dom';
 import { goToSignup } from '../../utils/guestSignup.js';
 
+const formatKey = (y, m, d) =>
+  `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+
 const JournalPage = () => {
   const navigate = useNavigate();
   const { user, token, profile, authLoading, profileLoading } = useAuth();
@@ -42,8 +45,8 @@ const JournalPage = () => {
     if (authLoading || profileLoading) return;
     if (guestMode) {
       const allEntries = guestData.journalEntries || [];
-      const startDate = new Date(year, month, 1).toISOString().slice(0, 10);
-      const endDate = new Date(year, month + 1, 0).toISOString().slice(0, 10);
+      const startDate = formatKey(year, month, 1);
+      const endDate = formatKey(year, month, new Date(year, month + 1, 0).getDate());
       const filtered = allEntries.filter((e) => e.entry_date >= startDate && e.entry_date <= endDate);
       setEntries(filtered);
       setLoading(false);
@@ -53,10 +56,8 @@ const JournalPage = () => {
     const fetchEntries = async () => {
       setLoading(true);
       try {
-        const startDate = new Date(year, month, 1);
-        const endDate = new Date(year, month + 1, 0); // last day of month
-        const start = startDate.toISOString().slice(0, 10);
-        const end = endDate.toISOString().slice(0, 10);
+        const start = formatKey(year, month, 1);
+        const end = formatKey(year, month, new Date(year, month + 1, 0).getDate());
         const { data, error: fetchError } = await supabase
           .from('journal_entries')
           .select('*')

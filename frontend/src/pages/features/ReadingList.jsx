@@ -106,11 +106,21 @@ const ReadingList = () => {
 
   const handleSave = async (values) => {
     const status = values.status || defaultStatus;
-    // enforce free limit per status
     const countForStatus = grouped[status]?.length || 0;
-    const isFreeLimitReached = !isPremium && countForStatus >= FREE_LIMIT_PER_STATUS;
-    if (isFreeLimitReached) {
-      throw new Error(`Free plan limit reached (${FREE_LIMIT_PER_STATUS} items). Upgrade to add more.`);
+    const isEditing = modalMode === 'edit' && Boolean(activeItem);
+    const currentStatus = activeItem?.status;
+    const statusUnchanged = isEditing && currentStatus === status;
+
+    // enforce free limit: allow editing within the same status even at the limit
+    if (!isPremium) {
+      if (!isEditing && countForStatus >= FREE_LIMIT_PER_STATUS) {
+        setLimitAlerts((prev) => ({ ...prev, [status]: true }));
+        throw new Error(`Free plan limit reached (${FREE_LIMIT_PER_STATUS} items). Upgrade to add more.`);
+      }
+      if (isEditing && !statusUnchanged && countForStatus >= FREE_LIMIT_PER_STATUS) {
+        setLimitAlerts((prev) => ({ ...prev, [status]: true }));
+        throw new Error(`Free plan limit reached (${FREE_LIMIT_PER_STATUS} items). Upgrade to add more.`);
+      }
     }
 
     if (guestMode) {

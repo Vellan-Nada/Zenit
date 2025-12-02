@@ -98,9 +98,18 @@ const MovieSeriesList = () => {
 
   const handleSave = async (payload) => {
     const countForStatus = grouped[payload.status]?.length || 0;
+    const isEditing = modalMode === 'edit' && Boolean(editingItem);
+    const statusUnchanged = isEditing && editingItem?.status === payload.status;
     const isFreeLimitReached = !isPremium && countForStatus >= FREE_LIMIT_PER_STATUS;
-    if (isFreeLimitReached) {
-      throw new Error(`Free plan limit reached (${FREE_LIMIT_PER_STATUS} items). Upgrade to add more.`);
+    if (!isPremium) {
+      if (!isEditing && isFreeLimitReached) {
+        setError(`Free plan limit reached (${FREE_LIMIT_PER_STATUS} items). Upgrade to add more.`);
+        throw new Error(`Free plan limit reached (${FREE_LIMIT_PER_STATUS} items). Upgrade to add more.`);
+      }
+      if (isEditing && !statusUnchanged && isFreeLimitReached) {
+        setError(`Free plan limit reached (${FREE_LIMIT_PER_STATUS} items). Upgrade to add more.`);
+        throw new Error(`Free plan limit reached (${FREE_LIMIT_PER_STATUS} items). Upgrade to add more.`);
+      }
     }
 
     if (guestMode) {

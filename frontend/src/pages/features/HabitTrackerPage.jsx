@@ -7,7 +7,6 @@ import UpgradeToPremium from '../../components/Notes/UpgradeToPremium.jsx';
 import HabitTable from '../../components/HabitTracker/HabitTable.jsx';
 import AddHabitModal from '../../components/HabitTracker/AddHabitModal.jsx';
 import StreakSummaryCard from '../../components/HabitTracker/StreakSummaryCard.jsx';
-import HistoryList from '../../components/HabitTracker/HistoryList.jsx';
 import '../../styles/HabitTracker.css';
 import { goToSignup } from '../../utils/guestSignup.js';
 
@@ -66,7 +65,6 @@ const HabitTrackerPage = () => {
   const [isPremium, setIsPremium] = useState(false);
   const guestMode = !user;
   const [habits, setHabits] = useState([]);
-  const [history, setHistory] = useState([]);
   const [logMap, setLogMap] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -81,7 +79,6 @@ const HabitTrackerPage = () => {
   const recompute = useCallback(
     (habitRows, logs, premiumFlag) => {
       const activeHabits = (habitRows || []).filter((habit) => !habit.is_deleted);
-      const deletedHabits = (habitRows || []).filter((habit) => habit.is_deleted);
       let earliestDate = todayIso();
       activeHabits.forEach((habit) => {
         if (habit.created_at) {
@@ -97,7 +94,6 @@ const HabitTrackerPage = () => {
         setShowLimitAlert(false);
       }
       setHabits(decorated);
-      setHistory(deletedHabits);
       setLogMap(logs);
       setShowStreak(premiumFlag);
       setLoading(false);
@@ -254,27 +250,7 @@ const HabitTrackerPage = () => {
       recompute(nextHabits, logMap, false);
       return;
     }
-    await supabase.from('habits').update({ is_deleted: true }).eq('id', habit.id);
-    await loadHabits();
-  };
-
-  const handleRestoreHabit = async (habit) => {
-    const activeCount = habits.length;
-    if (!isPremium && activeCount >= 7) {
-      setLimitReached(true);
-      setShowLimitAlert(true);
-      return;
-    }
-
-    if (guestMode) {
-      const combined = [...habits, ...history];
-      const nextHabits = combined.map((h) => (h.id === habit.id ? { ...h, is_deleted: false } : h));
-      setGuestData((prev) => ({ ...prev, habits: nextHabits, habitLogs: logMap }));
-      recompute(nextHabits, logMap, false);
-      return;
-    }
-
-    await supabase.from('habits').update({ is_deleted: false }).eq('id', habit.id);
+    await supabase.from('habits').delete().eq('id', habit.id);
     await loadHabits();
   };
 
@@ -293,6 +269,7 @@ const HabitTrackerPage = () => {
         return;
       }
       await supabase.from('habits').delete().eq('id', habit.id);
+      await supabase.from('habit_logs').delete().eq('habit_id', habit.id);
       await loadHabits();
     } catch (err) {
       console.error(err);
@@ -411,8 +388,6 @@ const HabitTrackerPage = () => {
       />
 
       {isPremium && <StreakSummaryCard habits={habits} />}
-
-      <HistoryList items={history} onRestore={handleRestoreHabit} onDelete={handleDestroyHabit} />
 
       <AddHabitModal
         open={modalState.open}
