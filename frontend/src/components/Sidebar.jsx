@@ -126,10 +126,12 @@ const Sidebar = ({
       <button type="button" className={styles.closeButton} onClick={onClose}>
         ✕
       </button>
-      <div className={styles.brand}>
-        <h1>EverDay</h1>
-        <span>All-in-one productivity space</span>
-      </div>
+      <NavLink to="/" className={styles.brandLink}>
+        <div className={styles.brand}>
+          <h1>EverDay</h1>
+          <span>All-in-one productivity space</span>
+        </div>
+      </NavLink>
 
       <div>
         <nav className={styles.nav} aria-label="Feature navigation">

@@ -33,11 +33,20 @@
   display: flex;
   flex-direction: column;
   font-size: 0.9rem;
+  overflow: hidden;
 }
 
 .profileDetails span {
   color: var(--text-muted);
   font-size: 0.8rem;
+}
+
+.profileDetails strong {
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .caret {

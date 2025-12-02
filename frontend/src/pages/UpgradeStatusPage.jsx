@@ -27,6 +27,12 @@ const UpgradeStatusPage = ({ status }) => {
   const copy = STATUS_COPY[status] || STATUS_COPY.success;
 
   useEffect(() => {
+    const last = sessionStorage.getItem('last_checkout');
+    if (!last) {
+      navigate('/upgrade', { replace: true });
+      return;
+    }
+    sessionStorage.removeItem('last_checkout');
     if (status === 'success') {
       refreshProfile();
     }

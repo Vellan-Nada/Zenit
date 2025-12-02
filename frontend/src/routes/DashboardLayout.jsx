@@ -71,6 +71,7 @@ const DashboardLayout = () => {
       return;
     }
     try {
+      sessionStorage.setItem('last_checkout', 'donation');
       const { url } = await createCheckoutSession('donation', token);
       window.location.href = url;
     } catch (err) {
@@ -93,6 +94,7 @@ const DashboardLayout = () => {
       }
       try {
         const { url } = await createCheckoutSession('plus', token);
+        sessionStorage.setItem('last_checkout', 'subscription');
         window.location.href = url;
         return;
       } catch (err) {
@@ -177,17 +179,20 @@ const DashboardLayout = () => {
                 Hey {(profile?.username || profile?.full_name || user?.user_metadata?.username || user?.user_metadata?.full_name || 'there')} 👋
               </h2>
           </div>
-          <div className={layoutStyles.topActions}>
-            {(!user || planTier === 'free') && (
-              <button
-                type="button"
-                className={layoutStyles.secondaryButton}
-                onClick={handleQuickUpgrade}
-              >
-                Upgrade
-              </button>
-            )}
-            <DonationButton onDonate={handleDonate} />
+            <div className={layoutStyles.topActions}>
+              {(!user || planTier === 'free') && (
+              <div className={layoutStyles.tooltipWrapper}>
+                <button
+                  type="button"
+                  className={layoutStyles.secondaryButton}
+                  onClick={handleQuickUpgrade}
+                >
+                  Upgrade
+                </button>
+                <div className={layoutStyles.tooltip}>Upgrade to Plus to enjoy all perks.</div>
+              </div>
+              )}
+              <DonationButton onDonate={handleDonate} />
             <FeedbackButton onFeedback={handleFeedback} />
             {user ? (
                 <button type="button" className={layoutStyles.secondaryButton} onClick={signOut}>

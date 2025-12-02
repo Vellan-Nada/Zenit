@@ -178,6 +178,7 @@ const JournalPage = () => {
       return;
     }
     try {
+      sessionStorage.setItem('last_checkout', 'subscription');
       const { url } = await createCheckoutSession('subscription', token, 'plus');
       window.location.href = url;
     } catch (err) {

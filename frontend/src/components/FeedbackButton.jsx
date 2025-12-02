@@ -5,11 +5,15 @@ const FeedbackButton = ({ onFeedback }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <div
+      style={{ position: 'relative', display: 'inline-block' }}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
       <button
         type="button"
         className={styles.feedbackButton}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={onFeedback}
         aria-expanded={open}
       >
         💬 Feedback
@@ -20,10 +24,7 @@ const FeedbackButton = ({ onFeedback }) => {
           role="dialog"
           aria-label="Feedback prompt"
         >
-          <p>Give feedback</p>
-          <button type="button" onClick={onFeedback}>
-            Open form
-          </button>
+          <p>Share feedback to help us improve.</p>
         </div>
       )}
     </div>

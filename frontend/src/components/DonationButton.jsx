@@ -5,11 +5,15 @@ const DonationButton = ({ onDonate }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <div
+      style={{ position: 'relative', display: 'inline-block' }}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
       <button
         type="button"
         className={styles.pillButton}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={onDonate}
         aria-expanded={open}
       >
         <span aria-hidden="true">❤️</span>
@@ -21,10 +25,7 @@ const DonationButton = ({ onDonate }) => {
           role="dialog"
           aria-label="Donation prompt"
         >
-          <p>Consider giving a $5 donation to support my work. I appreciate your support!</p>
-          <button type="button" onClick={onDonate}>
-            Donate $5
-          </button>
+          <p>Give a one-time $5 donation to support EverDay.</p>
         </div>
       )}
     </div>

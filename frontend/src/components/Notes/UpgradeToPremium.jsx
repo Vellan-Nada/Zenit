@@ -16,6 +16,7 @@ const UpgradeToPremium = ({ cta = 'Upgrade to Premium', variant = 'full' }) => {
     try {
       setLoading(true);
       const { url } = await createCheckoutSession('subscription', token, 'plus');
+      sessionStorage.setItem('last_checkout', 'subscription');
       window.location.href = url;
     } catch (error) {
       setLoading(false);

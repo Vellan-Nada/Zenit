@@ -54,6 +54,7 @@ const UpgradePage = () => {
     try {
       setStatus((prev) => ({ ...prev, checkout: tier, error: null }));
       const { url } = await createCheckoutSession('subscription', token, tier);
+      sessionStorage.setItem('last_checkout', 'subscription');
       window.location.href = url;
     } catch (err) {
       setStatus((prev) => ({ ...prev, checkout: null, error: err.message || 'Unable to start checkout' }));
@@ -65,6 +66,7 @@ const UpgradePage = () => {
     try {
       setStatus((prev) => ({ ...prev, checkout: 'donation', error: null }));
       const { url } = await createCheckoutSession('donation', token);
+      sessionStorage.setItem('last_checkout', 'donation');
       window.location.href = url;
     } catch (err) {
       setStatus((prev) => ({ ...prev, checkout: null, error: err.message || 'Unable to start donation' }));
