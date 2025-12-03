@@ -126,14 +126,16 @@ const Sidebar = ({
       <button type="button" className={styles.closeButton} onClick={onClose}>
         ✕
       </button>
-      <NavLink to="/" className={styles.brandLink}>
-        <div className={styles.brand}>
-          <h1>EverDay</h1>
-          <span>All-in-one productivity space</span>
-        </div>
-      </NavLink>
+      <div className={styles.sidebarHeader}>
+        <NavLink to="/" className={styles.brandLink} onClick={onClose}>
+          <div className={styles.brand}>
+            <h1>EverDay</h1>
+            <span>All-in-one productivity space</span>
+          </div>
+        </NavLink>
+      </div>
 
-      <div>
+      <div className={styles.sidebarBody}>
         <nav className={styles.nav} aria-label="Feature navigation">
           {navItems.map((item) => (
             <div

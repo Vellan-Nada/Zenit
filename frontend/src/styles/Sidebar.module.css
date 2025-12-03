@@ -35,7 +35,7 @@
 
 .brandLink:hover {
   background: #fff;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 5px 2px rgba(15, 23, 42, 0.12);
   transform: translateY(-1px);
   color: #0f172a;
 }
@@ -50,6 +50,25 @@
 .brand span {
   color: var(--text-muted);
   font-size: 0.85rem;
+}
+
+.sidebarHeader {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  /* background: #fff; */
+  padding: 0.75rem 0.1rem 0.5rem;
+  /* box-shadow: 0 6px 12px rgba(15, 23, 42, 0.04); */
+  margin-bottom: 0.5rem;
+  /* border-bottom: 1px solid var(--border);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-sizing: border-box; */
+}
+
+.sidebarBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .nav {
@@ -141,12 +160,21 @@
 
 .closeButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.75rem;
   border: none;
-  background: transparent;
-  font-size: 1.2rem;
+  background: #fff;
+  color: #0f172a;
+  font-size: 1.05rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
   display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.08);
+  z-index: 6;
 }
 
 @media (max-width: 900px) {
@@ -157,8 +185,19 @@
     transition: transform 0.3s ease;
     width: 100%;
     min-width: 0;
-    padding: 1.5rem 1.25rem;
-    overflow-y: auto;
+    padding: 1.5rem 1.25rem 1.5rem;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .sidebarHeader {
+    /* position: sticky;
+    top: 0;
+    z-index: 5; */
+    /* background: #fff; */
+    padding: 2rem 0.1rem 0.01rem;
+    /* box-shadow: 0 6px 12px rgba(15, 23, 42, 0.04); */
+    margin-bottom: 0.5rem;
   }
 
   .sidebarOpen {
@@ -167,5 +206,13 @@
 
   .closeButton {
     display: block;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 6;
+  }
+
+  .sidebarBody {
+    overflow-y: auto;
+    padding-bottom: 1.5rem;
   }
 }
