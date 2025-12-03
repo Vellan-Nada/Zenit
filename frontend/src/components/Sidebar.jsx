@@ -156,6 +156,7 @@ const Sidebar = ({
                 className={({ isActive }) =>
                   `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
                 }
+                onClick={isMobileOpen ? onClose : undefined}
               >
                 {item.label}
               </NavLink>
