@@ -8,6 +8,7 @@ import UpgradeToPremium from '../../components/Notes/UpgradeToPremium.jsx';
 import LoadingSpinner from '../../components/LoadingSpinner.jsx';
 import '../../styles/Notes.css';
 import { goToSignup } from '../../utils/guestSignup.js';
+import { NoteIcon } from '../../components/FeatureIcons.jsx';
 
 const FREE_NOTE_LIMIT = 15;
 
@@ -211,7 +212,10 @@ const NotesPage = () => {
     <section className="notes-page">
       <header className="notes-header">
         <div>
-          <h1>Notes</h1>
+          <h1 className="pageTitleWithIcon">
+            <NoteIcon className="pageTitleIcon" />
+            Notes
+          </h1>
         </div>
       </header>
 

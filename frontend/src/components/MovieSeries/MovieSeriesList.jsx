@@ -8,6 +8,7 @@ import MovieItemCard from './MovieItemCard.jsx';
 import '../../styles/MovieSeries.css';
 import { goToSignup } from '../../utils/guestSignup.js';
 import UpgradeToPremium from '../Notes/UpgradeToPremium.jsx';
+import { FilmIcon } from '../FeatureIcons.jsx';
 
 const STATUS_LABELS = {
   to_watch: 'Movie / Series to watch',
@@ -260,7 +261,10 @@ const MovieSeriesList = () => {
   return (
     <section className="movie-page">
       <header className="movie-header">
-        <h1>Movie / Series List</h1>
+        <h1 className="pageTitleWithIcon">
+          <FilmIcon className="pageTitleIcon" />
+          Movie / Series List
+        </h1>
       </header>
       {!user && (
         <div className="info-toast" style={{ marginBottom: '0.75rem' }}>

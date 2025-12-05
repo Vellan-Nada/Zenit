@@ -9,6 +9,7 @@ import SourceDumpDetailModal from '../../components/SourceDump/SourceDumpDetailM
 import '../../styles/SourceDump.css';
 import { goToSignup } from '../../utils/guestSignup.js';
 import UpgradeToPremium from '../../components/Notes/UpgradeToPremium.jsx';
+import { SourceIcon } from '../../components/FeatureIcons.jsx';
 
 const SourceDumpPage = () => {
   const { user, profile, authLoading, profileLoading } = useAuth();
@@ -171,7 +172,10 @@ const SourceDumpPage = () => {
     <section className="sd-page">
       <div className="sd-header">
         <div>
-          <h1>Source dump</h1>
+          <h1 className="pageTitleWithIcon">
+            <SourceIcon className="pageTitleIcon" />
+            Source dump
+          </h1>
         </div>
       </div>
       {!user && (

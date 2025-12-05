@@ -6,6 +6,7 @@ import TodoSection from '../../components/Todos/TodoSection.jsx';
 import LoadingSpinner from '../../components/LoadingSpinner.jsx';
 import '../../styles/Todos.css';
 import { goToSignup } from '../../utils/guestSignup.js';
+import { TodoIcon } from '../../components/FeatureIcons.jsx';
 
 const SECTION_CONFIG = [
   { type: 'task', label: 'To Do', limit: 10 },
@@ -185,7 +186,10 @@ const TodoPage = () => {
     <section className="todo-page">
       <header className="todo-page-header">
         <div>
-          <h1>To-Do & Goals</h1>
+          <h1 className="pageTitleWithIcon">
+            <TodoIcon className="pageTitleIcon" />
+            To-Do &amp; Goals
+          </h1>
         </div>
       </header>
       {!user && (

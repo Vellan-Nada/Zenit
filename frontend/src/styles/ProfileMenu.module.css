@@ -122,14 +122,14 @@
 
 .guestBox {
   margin-top: auto;
-  color: #2f2b27;
+  color: whitesmoke;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.35rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  background: #ffffff;
+  background:rgb(54, 54, 46);
   box-shadow: 0 14px 38px rgba(44, 42, 38, 0.08);
 }
 

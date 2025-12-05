@@ -7,6 +7,7 @@ import PomodoroSettings from '../../components/Pomodoro/PomodoroSettings.jsx';
 import ReportCards from '../../components/Pomodoro/ReportCards.jsx';
 import '../../styles/Pomodoro.css';
 import { goToSignup } from '../../utils/guestSignup.js';
+import { TimerIcon } from '../../components/FeatureIcons.jsx';
 
 const DEFAULT_SETTINGS = {
   pomodoro_minutes: 20,
@@ -463,7 +464,10 @@ const PomodoroPage = () => {
   return (
     <section className="pomodoro-page">
       <div className="pomodoro-topbar">
-        <h1>Pomodoro</h1>
+        <h1 className="pageTitleWithIcon">
+          <TimerIcon className="pageTitleIcon" />
+          Pomodoro
+        </h1>
         <div className="pomodoro-top-actions">
           <button type="button" className="pomodoro-btn ghost" onClick={() => setShowReport(true)}>
             Report

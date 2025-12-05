@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabaseClient.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useGuest } from '../../context/GuestContext.jsx';
+import { HabitIcon } from '../../components/FeatureIcons.jsx';
 import ColorPickerPopover from '../../components/Todos/ColorPickerPopover.jsx';
 import UpgradeToPremium from '../../components/Notes/UpgradeToPremium.jsx';
 import HabitTable from '../../components/HabitTracker/HabitTable.jsx';
@@ -289,7 +290,10 @@ const HabitTrackerPage = () => {
     <section className="habit-tracker">
       <div className="habit-header">
         <div>
-          <h1>Habit Tracker</h1>
+          <h1 className="pageTitleWithIcon">
+            <HabitIcon className="pageTitleIcon" />
+            Habit Tracker
+          </h1>
         </div>
         <button
           type="button"

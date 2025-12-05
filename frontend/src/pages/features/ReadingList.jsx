@@ -7,6 +7,7 @@ import StatusColumn from '../../components/reading-list/StatusColumn.jsx';
 import BookFormModal from '../../components/reading-list/BookFormModal.jsx';
 import '../../styles/ReadingList.css';
 import { goToSignup } from '../../utils/guestSignup.js';
+import { BookIcon } from '../../components/FeatureIcons.jsx';
 
 const STATUS_LABELS = {
   want_to_read: 'Books want to read',
@@ -249,7 +250,10 @@ const ReadingList = () => {
     <section className="reading-page">
       <header className="reading-header">
         <div>
-          <h1>Reading List</h1>
+          <h1 className="pageTitleWithIcon">
+            <BookIcon className="pageTitleIcon" />
+            Reading List
+          </h1>
         </div>
       </header>
       {!user && (

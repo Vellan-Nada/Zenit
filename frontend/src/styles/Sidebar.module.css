@@ -82,6 +82,7 @@
   border: none;
   display: flex;
   align-items: center;
+  gap: 1rem;
   padding: 0.7rem 0.95rem;
   border-radius: 0.95rem;
   background: transparent;
@@ -100,6 +101,12 @@
   background: #e7e2da;
   color: #2f2b27;
   font-weight: 700;
+}
+
+.navIcon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
 }
 
 .draggableItem {
