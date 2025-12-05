@@ -4,21 +4,20 @@
   align-items: center;
   justify-content: center;
   padding: 2.5rem;
-  background: transparent;
+  background: #efeeeb;
 }
 
 .card {
   width: 100%;
   max-width: 420px;
-  background: var(--surface);
+  background: #ffffff;
   border-radius: 1.6rem;
   padding: 2.4rem 2.1rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  border: 1px solid var(--app-border);
-  box-shadow: var(--app-shadow);
-  backdrop-filter: blur(12px);
+  border: 1px solid #e7e2da;
+  box-shadow: 0 14px 38px rgba(44, 42, 38, 0.08);
 }
 
 .card h1 {
@@ -41,20 +40,23 @@
 
 .inputGroup label {
   font-weight: 600;
-  color: #0b1224;
+  color: #2f2b27;
 }
 
 .inputGroup input {
   border-radius: 0.95rem;
   padding: 0.85rem 1rem;
   font-size: 1rem;
+  background: #f9f7f3;
+  border: 1px solid #dcd6cc;
+  color: #2f2b27;
 }
 
 .submitButton {
-  border: 1px solid rgba(14, 165, 233, 0.25);
+  border: 1px solid #3c3a36;
   border-radius: 1rem;
   padding: 0.9rem;
-  background: #0ea5e9;
+  background: #3c3a36;
   color: #fff;
   font-weight: 600;
   font-size: 1.05rem;
@@ -84,15 +86,15 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--border);
+  background: #e0dcd4;
 }
 
 .socialButton {
   width: 100%;
-  border: 1px solid rgba(11, 18, 36, 0.05);
+  border: 1px solid #e7e2da;
   border-radius: 1rem;
   padding: 0.9rem;
-  background: var(--surface);
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;

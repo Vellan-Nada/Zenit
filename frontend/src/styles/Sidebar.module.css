@@ -2,7 +2,7 @@
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);
   flex: 0 0 var(--sidebar-width);
-  background: var(--surface);
+  background: #f7f6f3;
   border-right: 1px solid var(--border);
   padding: 2rem 1.35rem;
   display: flex;
@@ -11,7 +11,6 @@
   position: relative;
   z-index: 30;
   box-sizing: border-box;
-  backdrop-filter: blur(12px);
 }
 
 .brand {
@@ -20,23 +19,27 @@
   gap: 0.25rem;
 }
 
-.brandLink {
-  display: block;
-  border-radius: var(--radius-lg);
-  padding: 0.9rem 1rem;
-  position: relative;
-  overflow: hidden;
-  text-decoration: none;
-  color: #0f172a;
-  background: #f1f7fc;
-  border: 1px solid rgba(14, 165, 233, 0.2);
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
+.brandLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 0.05rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  background: transparent;
+}
+
 .brandLink:hover {
-  background: var(--surface);
-  transform: translateY(-1px);
-  color: #0f172a;
+  border-color: var(--border);
+  color: #2f2b27;
 }
 
 .brand h1 {
@@ -47,15 +50,18 @@
 }
 
 .brand span {
-  color: #0b1224;
+  color: #2f2b27;
   font-size: 0.9rem;
   opacity: 0.7;
 }
 
+.logoIcon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+}
+
 .sidebarHeader {
-  position: sticky;
-  top: 0;
-  z-index: 5;
   padding: 0.75rem 0.1rem 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -79,21 +85,20 @@
   padding: 0.7rem 0.95rem;
   border-radius: 0.95rem;
   background: transparent;
-  color: #0b1224;
+  color: #2f2b27;
   font-weight: 600;
-  transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .navLink:hover,
 .navLink:focus-visible {
-  background: rgba(14, 165, 233, 0.08);
-  color: var(--accent);
-  transform: translateX(4px);
+  background: #ece9e3;
+  color: #2f2b27;
 }
 
 .navLinkActive {
-  background: #e6f4fb;
-  color: var(--accent-strong);
+  background: #e7e2da;
+  color: #2f2b27;
   font-weight: 700;
 }
 
@@ -129,8 +134,8 @@
 
 .ctaCard {
   border-radius: var(--radius);
-  background: var(--card-muted);
-  color: #0f172a;
+  background: #f1f0eb;
+  color: #2f2b27;
   padding: 1.1rem;
   display: flex;
   flex-direction: column;
@@ -143,7 +148,7 @@
 }
 
 .ctaCard button {
-  background: #0f172a;
+  background: #2f2b27;
   border: none;
   border-radius: 0.75rem;
   color: #fff;
@@ -156,8 +161,8 @@
   top: 0.75rem;
   right: 0.75rem;
   border: none;
-  background: rgba(255, 255, 255, 0.85);
-  color: #0f172a;
+  background: #f1f0eb;
+  color: #2f2b27;
   font-size: 1.05rem;
   width: 2.4rem;
   height: 2.4rem;
@@ -177,9 +182,9 @@
     transition: transform 0.3s ease;
     width: 100%;
     min-width: 0;
-  padding: 1.5rem 1.25rem 1.5rem;
-  overflow: hidden;
-  background: var(--surface);
+    padding: 1.5rem 1.25rem 1.5rem;
+    overflow: hidden;
+    background: #f7f6f3;
   }
 
   .sidebarHeader {

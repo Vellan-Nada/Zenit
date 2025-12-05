@@ -29,7 +29,7 @@ const ProfileMenu = ({ onUpgradeClick = () => {}, onManageSubscription = () => {
   if (!user) {
     return (
       <div className={styles.guestBox}>
-        <p>Sign in to personalize EverDay.</p>
+        <p>Sign in to personalize EverDay</p>
         <button type="button" onClick={() => navigate('/login')}>
           Sign in
         </button>
