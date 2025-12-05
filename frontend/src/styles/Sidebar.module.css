@@ -33,7 +33,7 @@
   border-radius: 12px;
   padding: 0.05rem;
   text-decoration: none;
-  border: 1px solid transparent;
+  border: 1px solid var(--border);
   background: transparent;
 }
 
