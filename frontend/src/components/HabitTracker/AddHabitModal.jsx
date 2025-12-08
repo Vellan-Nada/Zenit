@@ -33,24 +33,18 @@ const AddHabitModal = ({ open, onClose, onSubmit, initialHabit, isPremium, limit
   return (
     <div className="habit-modal-backdrop" role="dialog" aria-modal="true">
       <form className="habit-modal" onSubmit={handleSubmit}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
+        <div className="habit-modal-header">
           <h2>{initialHabit ? 'Edit Habit' : 'Add Habit'}</h2>
-          <button type="button" onClick={onClose} style={{ border: 'none', background: 'transparent', fontSize: '1.2rem' }}>
+          <button type="button" className="habit-modal-close" onClick={onClose} aria-label="Close">
             ✕
           </button>
         </div>
         {limitReached && !initialHabit && (
-          <p style={{ color: 'var(--danger)', fontSize: '0.9rem' }}>
+          <p className="habit-modal-limit">
             Free plan limit reached (10 habits). Upgrade to add more.
           </p>
         )}
-        <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+        <label className="habit-field">
           <span>Name</span>
           <input
             name="name"
@@ -59,19 +53,24 @@ const AddHabitModal = ({ open, onClose, onSubmit, initialHabit, isPremium, limit
             value={form.name}
             onChange={handleChange}
             placeholder="e.g. Morning stretch"
-            style={{ borderRadius: '0.75rem', border: '1px solid var(--border)', padding: '0.7rem' }}
             disabled={limitReached && !initialHabit}
+            className="habit-input"
           />
         </label>
-        <div>
-          <p style={{ marginBottom: '0.35rem' }}>Icon</p>
+        <div className="habit-icon-section">
+          <p>Icon</p>
           <IconPicker value={form.icon_key} onChange={(icon) => setForm((prev) => ({ ...prev, icon_key: icon }))} isPremium={isPremium} />
         </div>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
-          <button type="button" className="secondaryButton" onClick={onClose}>
+        <div className="habit-modal-actions">
+          <button type="button" className="secondaryButton" onClick={onClose} aria-label="Cancel">
             Cancel
           </button>
-          <button type="submit" disabled={limitReached && !initialHabit} style={{ border: 'none', borderRadius: '0.75rem', background: 'var(--accent)', color: '#fff', padding: '0.6rem 1.1rem' }}>
+          <button
+            type="submit"
+            disabled={limitReached && !initialHabit}
+            className="habit-primary-btn"
+            aria-label={initialHabit ? 'Save changes' : 'Add habit'}
+          >
             {saving ? 'Saving…' : initialHabit ? 'Save changes' : 'Create habit'}
           </button>
         </div>

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 90%;
+  max-width: 95%;
   margin: 0 auto;
   width: 100%;
 }
@@ -31,6 +31,28 @@
   flex-wrap: wrap;
   font-size: 0.9rem;
   color: var(--text-muted);
+}
+
+.habit-add-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.habit-add-row button {
+  border: none;
+  border-radius: 0.85rem;
+  background: #3f3d37;
+  color: #fff;
+  padding: 0.65rem 1.3rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.habit-add-row button:hover {
+  filter: brightness(0.92);
 }
 
 .habit-alert {
@@ -352,10 +374,17 @@
   font-weight: 700;
   color: var(--text-strong);
   margin-bottom: 0.8rem;
+  line-height: 1.2;
+  padding: 2px 0;
 }
 
 .streak-card-header svg {
   color: #f59e0b;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: block;
+  margin-bottom: 1px;
 }
 
 .streak-list,
@@ -445,31 +474,129 @@
   width: 100%;
   max-width: 420px;
   background: var(--surface);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--app-border);
+  padding: 1.5rem 1.6rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.12);
 }
 
-.icon-picker-grid {
+.habit-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.habit-modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1.35rem;
+  color: var(--text-strong);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.habit-modal-limit {
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.icon-picker__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
-  gap: 0.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+  gap: 0.55rem;
 }
 
-.icon-option {
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  padding: 0.4rem;
-  font-size: 1.3rem;
+.icon-picker__item {
+  border: 1px solid var(--app-border);
+  border-radius: 12px;
+  padding: 0.55rem 0.35rem;
   background: var(--surface);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-strong);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, background 0.15s ease;
+  cursor: pointer;
 }
 
-.icon-option.active {
+.icon-picker__item:hover {
+  border-color: var(--border-strong, #c0c4cc);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.icon-picker__item.is-active {
   border-color: var(--accent);
   background: var(--accent-muted);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.09);
+}
+
+.icon-picker__symbol {
+  font-size: 1.35rem;
+}
+
+.habit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.habit-input {
+  border-radius: 10px;
+  border: 1px solid var(--app-border);
+  padding: 0.85rem;
+  background: var(--surface);
+  font-weight: 500;
+}
+
+.habit-icon-section p {
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.habit-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.habit-primary-btn {
+  border: none;
+  border-radius: 12px;
+  background: #3f3d37;
+  color: #fff;
+  padding: 0.7rem 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.habit-primary-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(0.94);
+}
+
+/* Match the secondary button to primary styling */
+.habit-modal-actions .secondaryButton {
+  border: none;
+  border-radius: 12px;
+  background: #e6e6e6;
+  color: #0f1624;
+  padding: 0.7rem 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.habit-modal-actions .secondaryButton:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.97);
 }
 
 .habit-empty {

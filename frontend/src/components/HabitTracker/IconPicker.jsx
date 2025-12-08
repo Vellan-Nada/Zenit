@@ -22,17 +22,11 @@ const IconPicker = ({ value, onChange, isPremium }) => {
               onClick={() => onChange(icon.key)}
               aria-pressed={isActive}
             >
-              <span>{icon.symbol}</span>
-              <small>{icon.label}</small>
-            </button>
+            <span className="icon-picker__symbol">{icon.symbol}</span>
+          </button>
           );
         })}
       </div>
-      {value && (
-        <button type="button" className="icon-picker__clear" onClick={() => onChange('')}>
-          Clear icon
-        </button>
-      )}
     </div>
   );
 };

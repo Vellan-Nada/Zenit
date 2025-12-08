@@ -291,19 +291,6 @@ const HabitTrackerPage = () => {
             Habit Tracker
           </h1>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            if (limitReached && !isPremium) {
-              setShowLimitAlert(true);
-              return;
-            }
-            setShowLimitAlert(false);
-            setModalState({ open: true, habit: null });
-          }}
-        >
-          + Add Habit
-        </button>
       </div>
 
       {limitReached && showLimitAlert && !isPremium && (
@@ -325,8 +312,20 @@ const HabitTrackerPage = () => {
         </div>
       )}
 
-      <div className="habit-subheader">
-        <div className="habit-subheader-right" />
+      <div className="habit-add-row">
+        <button
+          type="button"
+          onClick={() => {
+            if (limitReached && !isPremium) {
+              setShowLimitAlert(true);
+              return;
+            }
+            setShowLimitAlert(false);
+            setModalState({ open: true, habit: null });
+          }}
+        >
+          + Add Habit
+        </button>
       </div>
 
       <HabitTable
