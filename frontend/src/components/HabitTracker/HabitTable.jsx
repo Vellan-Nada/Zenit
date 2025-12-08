@@ -20,10 +20,11 @@ const HabitTable = ({
       const scroller = scrollerRef.current;
       if (!scroller) return;
       const available = scroller.clientWidth || 0;
-      const perDate = 110;
-      const base = 480; // rough width for non-date columns
+      const perDate = 100;
+      const base = 340; // tighter width for non-date columns
       const needed = base + dates.length * perDate;
-      const target = Math.max(needed, available + 25, 900);
+      // Keep table width close to what is actually needed; avoid stretching when few dates
+      const target = Math.max(needed, Math.min(available, 900));
       setTableWidth(target);
     };
     measure();
@@ -41,9 +42,9 @@ const HabitTable = ({
             <tr>
               <th>#</th>
               <th className="habit-col">Habit</th>
-              <th className="actions-col">Actions</th>
               <th className="icon-col">{showIcons ? 'Icon' : ''}</th>
               <th className="streak-col">{showStreak ? 'Streak' : ''}</th>
+              <th className="actions-col">Actions</th>
               {dates.map((date) => (
                 <th key={date.iso} className="sticky-dates">
                   {date.label}

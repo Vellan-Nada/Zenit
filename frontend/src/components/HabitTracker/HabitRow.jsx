@@ -11,22 +11,53 @@ const HabitRow = ({
   onDelete,
   rowRef,
 }) => {
+  const EditIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 20h9" />
+      <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" />
+    </svg>
+  );
+
+  const TrashIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M3 6h18" />
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+      <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+      <line x1="10" x2="10" y1="11" y2="17" />
+      <line x1="14" x2="14" y1="11" y2="17" />
+    </svg>
+  );
+
   const renderFixedCols = () => (
     <>
       <td>{index + 1}</td>
       <td className="habit-col">
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <strong>{habit.name}</strong>
-        </div>
-      </td>
-      <td className="actions-col">
-        <div className="habit-row-actions">
-          <button type="button" onClick={() => onEdit(habit)}>
-            Edit
-          </button>
-          <button type="button" onClick={() => onDelete(habit)}>
-            Delete
-          </button>
+          <strong title={habit.name} className="habit-name-ellipsis">
+            {habit.name}
+          </strong>
         </div>
       </td>
       <td className="icon-col">
@@ -38,6 +69,21 @@ const HabitRow = ({
             {habit.currentStreak}-day
           </span>
         )}
+      </td>
+      <td className="actions-col">
+        <div className="habit-row-actions">
+          <button type="button" className="icon-action" onClick={() => onEdit(habit)} aria-label="Edit habit">
+            <EditIcon />
+          </button>
+          <button
+            type="button"
+            className="icon-action"
+            onClick={() => onDelete(habit)}
+            aria-label="Delete habit"
+          >
+            <TrashIcon />
+          </button>
+        </div>
       </td>
     </>
   );

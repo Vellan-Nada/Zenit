@@ -69,13 +69,10 @@ const HabitTrackerPage = () => {
   const [logMap, setLogMap] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showIcons, setShowIcons] = useState(true);
-  const [showStreak, setShowStreak] = useState(false);
   const [modalState, setModalState] = useState({ open: false, habit: null });
   const [limitReached, setLimitReached] = useState(false);
    const [showLimitAlert, setShowLimitAlert] = useState(false);
   const [dates, setDates] = useState([]);
-  const [streakPromptVisible, setStreakPromptVisible] = useState(false);
 
   const recompute = useCallback(
     (habitRows, logs, premiumFlag) => {
@@ -96,7 +93,6 @@ const HabitTrackerPage = () => {
       }
       setHabits(decorated);
       setLogMap(logs);
-      setShowStreak(premiumFlag);
       setLoading(false);
     },
     []
@@ -330,74 +326,21 @@ const HabitTrackerPage = () => {
       )}
 
       <div className="habit-subheader">
-        <div className="habit-subheader-right">
-          <div className="toggleWrap">
-            <span>Streak</span>
-            {isPremium ? (
-              <button
-                type="button"
-                className={`toggle ${showStreak ? 'on' : ''}`}
-                onClick={() => setShowStreak((prev) => !prev)}
-                aria-pressed={showStreak}
-              >
-                <span className="toggle-knob" />
-              </button>
-            ) : (
-              <div className="streak-lock-wrapper">
-                <button
-                  type="button"
-                  className="toggle disabled"
-                  onClick={() => setStreakPromptVisible(true)}
-                  aria-label="Streak is a premium feature"
-                >
-                  <span className="toggle-knob" />
-                </button>
-                {streakPromptVisible && (
-                  <div className="streak-lock-pop">
-                    <p style={{ marginTop: 0, marginBottom: '0.75rem', textAlign: 'left' }}>
-                      Streaks are a premium feature.
-                    </p>
-                    <div className="streak-pop-actions">
-                      <UpgradeToPremium cta="Upgrade" variant="full" />
-                      <button
-                        type="button"
-                        className="secondaryButton"
-                        onClick={() => setStreakPromptVisible(false)}
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-          <div className="toggleWrap">
-            <span>Icons</span>
-            <button
-              type="button"
-              className={`toggle ${showIcons ? 'on' : ''}`}
-              onClick={() => setShowIcons((prev) => !prev)}
-              aria-pressed={showIcons}
-            >
-              <span className="toggle-knob" />
-            </button>
-          </div>
-        </div>
+        <div className="habit-subheader-right" />
       </div>
 
       <HabitTable
         habits={habits}
         dates={dates}
-        showIcons={showIcons}
-        showStreak={isPremium ? showStreak : false}
+        showIcons
+        showStreak
         isPremium={isPremium}
         onToggleStatus={handleToggleStatus}
         onEditHabit={(habit) => setModalState({ open: true, habit })}
         onDeleteHabit={handleDeleteHabit}
       />
 
-      {isPremium && <StreakSummaryCard habits={habits} />}
+      <StreakSummaryCard habits={habits} />
 
       <AddHabitModal
         open={modalState.open}

@@ -12,7 +12,7 @@ import { createBillingPortalSession, createCheckoutSession } from '../api/billin
 import layoutStyles from '../styles/DashboardLayout.module.css';
 import { supabase } from '../lib/supabaseClient.js';
 
-const SparklesIcon = ({ size = 18, className }) => (
+const CrownIcon = ({ size = 18, className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -25,11 +25,9 @@ const SparklesIcon = ({ size = 18, className }) => (
     strokeLinejoin="round"
     className={className}
   >
-    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-    <path d="M5 3v4" />
-    <path d="M9 3v4" />
-    <path d="M3 5h4" />
-    <path d="M3 9h4" />
+    {/* Classic crown silhouette (lucide-like) */}
+    <path d="m2 7 5 5 5-10 5 10 5-5v11H2Z" />
+    <path d="M2 18h20" />
   </svg>
 );
 
@@ -246,7 +244,7 @@ const DashboardLayout = () => {
                   className={layoutStyles.secondaryButton}
                   onClick={handleQuickUpgrade}
                 >
-                  <SparklesIcon size={18} aria-hidden="true" />
+                  <CrownIcon size={18} aria-hidden="true" />
                   Upgrade
                 </button>
                 <div className={layoutStyles.tooltip}>Upgrade to Plus to enjoy all perks.</div>

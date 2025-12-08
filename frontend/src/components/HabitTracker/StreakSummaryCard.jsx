@@ -1,3 +1,21 @@
+import { getIconSymbol } from './iconConfig.js';
+
+const FlameIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M8.5 14.5C10.5 12.5 10.5 9 7 6c-1.5 4-4 6.5-4 10a9 9 0 0 0 18 0c0-5-3.5-7.5-5.5-10.5-.5 3-2 5-5 9Z" />
+  </svg>
+);
+
 const StreakSummaryCard = ({ habits }) => {
   if (!habits.length) return null;
 
@@ -10,11 +28,21 @@ const StreakSummaryCard = ({ habits }) => {
 
   return (
     <div className="streak-card">
-      <h3>Top streaks</h3>
-      <ul>
-        {sorted.map((habit) => (
-          <li key={habit.id}>
-            <strong>{habit.name}</strong> – {habit.currentStreak} days
+      <div className="streak-card-header">
+        <FlameIcon />
+        <span>Top Streaks</span>
+      </div>
+      <ul className="streak-list">
+        {sorted.map((habit, idx) => (
+          <li key={habit.id} className="streak-row">
+            <div className="streak-left">
+              <span className="streak-rank">#{idx + 1}</span>
+              <span className="streak-icon">{getIconSymbol(habit.icon_key) || '🏆'}</span>
+              <span className="streak-name">{habit.name}</span>
+            </div>
+            <div className="streak-days">
+              {habit.currentStreak} day{habit.currentStreak === 1 ? '' : 's'}
+            </div>
           </li>
         ))}
       </ul>
