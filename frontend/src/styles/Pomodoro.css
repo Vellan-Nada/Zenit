@@ -60,19 +60,19 @@
   box-shadow: var(--app-shadow);
 }
 
-.pomodoro-header h1 {
-  margin: 0;
+.pomodoro-header {
+  text-align: center;
 }
 
-.pomodoro-subtitle {
+.pomodoro-header h1 {
   margin: 0;
-  color: var(--text-muted);
 }
 
 .pomodoro-tabs {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .pomodoro-tab {
@@ -121,7 +121,9 @@
   width: 44px;
   height: 44px;
   background: var(--surface);
-  font-size: 1.1rem;
+  background-color: rgb(44, 43, 43);
+  color: white;
+  font-size: 1.5rem;
 }
 
 .pomodoro-modal {
@@ -179,8 +181,22 @@
 
 .pomodoro-toggle-row {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.pomodoro-toggle-row input[type='checkbox'] {
+  margin: 0;
+}
+
+.pomodoro-toggle-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
 }
 
 .pomodoro-modal-actions {
@@ -199,7 +215,7 @@
   background: var(--surface);
   border: 1px solid var(--app-border);
   border-radius: var(--radius);
-  padding: 1.25rem;
+  padding: 3rem;
   box-shadow: var(--app-shadow);
 }
 

@@ -85,14 +85,15 @@ const PomodoroSettings = ({ open, onClose, settings, onSave, saving }) => {
               onChange={(e) => handleChange('long_break_after_sessions', e.target.value)}
             />
           </label>
-          <label className="pomodoro-toggle-row">
-            <input
-              type="checkbox"
-              checked={form.play_sound}
-              onChange={(e) => handleChange('play_sound', e.target.checked)}
-            />
-            <span>Play alert sound on completion</span>
-          </label>
+        </div>
+        <div className="pomodoro-toggle-row">
+          <input
+            type="checkbox"
+            checked={form.play_sound}
+            onChange={(e) => handleChange('play_sound', e.target.checked)}
+            id="play-sound-toggle"
+          />
+          <label htmlFor="play-sound-toggle">Play alert sound on completion</label>
         </div>
         {error && <p className="pomodoro-error">{error}</p>}
         <div className="pomodoro-modal-actions">

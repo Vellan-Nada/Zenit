@@ -283,17 +283,6 @@ const PomodoroPage = () => {
       });
     }
 
-    if (settings.play_sound && typeof Audio !== 'undefined') {
-      try {
-        const audio = new Audio(
-          'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YRAAAA=='
-        );
-        audio.play().catch(() => {});
-      } catch (err) {
-        // ignore audio errors
-      }
-    }
-
     if (mode === 'pomodoro') {
       // auto start short break
       setMode('short_break');
@@ -493,6 +482,7 @@ const PomodoroPage = () => {
         onToggle={handleToggle}
         onRestart={handleRestart}
         onSelectMode={handleModeSelect}
+        playSound={settings.play_sound}
       />
       <PomodoroSettings
         open={settingsOpen}

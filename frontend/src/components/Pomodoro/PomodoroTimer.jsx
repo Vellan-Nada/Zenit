@@ -19,8 +19,10 @@ const PomodoroTimer = ({
   onRestart,
   onSelectMode,
   title = 'Pomodoro',
+  playSound = false,
 }) => {
   const intervalRef = useRef(null);
+  const soundRef = useRef(null);
 
   // ensure interval is cleared if parent toggles isRunning/secondsLeft externally
   useEffect(() => {
@@ -31,13 +33,23 @@ const PomodoroTimer = ({
     };
   }, []);
 
+  // lazy init audio
+  useEffect(() => {
+    soundRef.current = new Audio('/sounds/alert.mp3');
+  }, []);
+
+  // play sound when timer hits zero and setting is enabled
+  useEffect(() => {
+    if (secondsLeft === 0 && playSound && soundRef.current) {
+      soundRef.current.currentTime = 0;
+      soundRef.current.play().catch(() => {});
+    }
+  }, [secondsLeft, playSound]);
+
   return (
     <div className="pomodoro-timer">
       <div className="pomodoro-header">
-        <div>
-          <p className="pomodoro-subtitle">Plan the work. Crush the goals.</p>
-          <h1>{title}</h1>
-        </div>
+        <h1>{title}</h1>
       </div>
       <ModeTabs current={mode} onSelect={onSelectMode} />
       <div className="timer-display">
