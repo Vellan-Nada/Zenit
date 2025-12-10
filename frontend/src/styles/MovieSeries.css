@@ -252,6 +252,16 @@
   gap: 0.5rem;
 }
 
+/* Keep modal footer buttons compact (match Reading List) */
+.movie-modal-actions .movie-btn {
+  width: auto;
+  text-align: center;
+}
+
+.movie-modal-actions .movie-btn.primary {
+  width: auto;
+}
+
 .movie-empty {
   color: var(--text-muted);
 }

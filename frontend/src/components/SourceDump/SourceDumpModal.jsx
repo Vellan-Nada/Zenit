@@ -101,7 +101,7 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
         <div className="sd-form">
           <label>
             <span>Title</span>
-            <input type="text" value={form.title} onChange={(e) => handleChange('title', e.target.value)} />
+            <input type="text" value={form.title} placeholder="Add a title..." onChange={(e) => handleChange('title', e.target.value)} />
           </label>
           <label>
             <span>Links</span>

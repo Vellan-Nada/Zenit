@@ -275,6 +275,7 @@
   border-radius: 0.8rem;
   padding: 0.6rem;
   color: var(--text-muted);
+  background-color: #f8f9fb
 }
 
 .sd-modal {
@@ -324,6 +325,7 @@
   border-radius: 0.7rem;
   border: 1px solid var(--border);
   padding: 0.5rem 0.7rem;
+  background-color: #f8f9fb;
 }
 
 .sd-section {

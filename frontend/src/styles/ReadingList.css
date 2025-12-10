@@ -282,3 +282,13 @@
   justify-content: flex-end;
   gap: 0.5rem;
 }
+
+/* Keep modal footer buttons compact and right-aligned */
+.reading-modal-actions .reading-btn {
+  width: auto;
+  text-align: center;
+}
+
+.reading-modal-actions .reading-btn.primary {
+  width: auto;
+}
