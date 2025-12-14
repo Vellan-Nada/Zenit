@@ -23,7 +23,8 @@ const PLAN_CARDS = [
     tier: 'plus',
     title: 'Plus',
     price: '$5/month',
-    accent: '#edf2ff',
+    accent: '#0f172a',
+    highlight: true,
     features: [
       'Unlimited habits, notes, to-dos, reading list, movies/series, and source dumps',
       'Save screenshots in Source Dump',
@@ -116,21 +117,21 @@ const UpgradePage = () => {
                 borderRadius: '1rem',
                 padding: '2.2rem',
                 background: plan.highlight ? plan.accent : '#fff',
-                color: '#0f172a',
-                border: plan.highlight ? '1px solid #c7d2fe' : '1px solid var(--border)',
-                boxShadow: plan.highlight ? '0 30px 60px rgba(15,23,42,0.12)' : 'none',
+                color: plan.highlight ? '#fff' : '#0f172a',
+                border: plan.highlight ? '1px solid #0d162a' : '1px solid var(--border)',
+                boxShadow: plan.highlight ? '0 35px 80px rgba(0,0,0,0.25)' : '0 10px 24px rgba(15,23,42,0.08)',
                 position: 'relative',
               }}
             >
               <h2 style={{ marginTop: 0, marginBottom: '0.35rem' }}>{plan.title}</h2>
-              <p style={{ color: plan.highlight ? '#1f3b8a' : 'var(--text-muted)', margin: '0 0 0.9rem' }}>
+              <p style={{ color: plan.highlight ? 'rgba(255,255,255,0.82)' : 'var(--text-muted)', margin: '0 0 0.9rem' }}>
                 {plan.subtitle}
               </p>
               <p style={{ fontSize: '2.4rem', fontWeight: 700, margin: '0.5rem 0 1.25rem' }}>{plan.price}</p>
               <ul
                 style={{
                   paddingLeft: '1.1rem',
-                  color: plan.highlight ? 'rgba(9, 0, 0, 0.9)' : 'var(--text-muted)',
+                  color: plan.highlight ? 'rgba(255,255,255,0.9)' : 'var(--text-muted)',
                   lineHeight: 1.6,
                   margin: 0,
                 }}
@@ -148,10 +149,10 @@ const UpgradePage = () => {
                     marginTop: '1rem',
                     width: '100%',
                     borderRadius: '0.9rem',
-                    border: 'none',
+                    border: plan.highlight ? '1px solid #fff' : 'none',
                     padding: '0.85rem 1rem',
-                  background: plan.highlight ? '#1d4ed8' : '#0f172a',
-                  color: '#fff',
+                    background: plan.highlight ? '#fff' : '#0f172a',
+                    color: plan.highlight ? '#0f172a' : '#fff',
                     fontWeight: 700,
                     cursor: disabled ? 'not-allowed' : 'pointer',
                     opacity: disabled ? 0.6 : 1,
