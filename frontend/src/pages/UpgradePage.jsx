@@ -11,26 +11,25 @@ const PLAN_CARDS = [
   {
     tier: 'free',
     title: 'Free',
-    price: '$0/mo',
-    subtitle: 'Get started with core tools and local saving.',
+    price: '$0',
     accent: '#f8fafc',
     features: [
-      'Use all free features locally',
-      'Manual data export/import',
-      'Community support',
+      'Core tools: Habits, Notes, To-Dos, Pomodoro, Source Dump, Journal, Reading & Movies/Series lists',
+      'Limits: 7 habits • 15 notes • 15 to-dos • 10 reading + 10 watch items per column • 7 Source Dump items (no screenshots)',
+      'Not included: Pomodoro reports • Journaling reports • Card color customization',
     ],
   },
   {
     tier: 'plus',
     title: 'Plus',
-    price: '$5/mo',
-    subtitle: 'Sync and back up your productivity OS.',
+    price: '$5/month',
     accent: '#edf2ff',
     features: [
-      'Secure sync & daily backups',
-      'Habit + task history',
-      'Priority roadmap access',
-      'Early access to new tools',
+      'Unlimited habits, notes, to-dos, reading list, movies/series, and source dumps',
+      'Save screenshots in Source Dump',
+      'Pomodoro usage reports (trends, totals, streaks)',
+      'Journaling reports (patterns, consistency, summaries)',
+      'Card color customization across features',
     ],
   },
 ];
@@ -95,14 +94,8 @@ const UpgradePage = () => {
 
   return (
     <section style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <header>
-        <p style={{ textTransform: 'uppercase', fontSize: '0.8rem', color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
-          Plans
-        </p>
-        <h1 style={{ marginBottom: '0.35rem' }}>Choose the focus you need</h1>
-        <p style={{ color: 'var(--text-muted)', margin: 0 }}>
-          Unlock synced data, AI assistance, and backups. Cancel anytime in Stripe—the rest of your billing cycle stays active.
-        </p>
+      <header style={{ marginBottom: '0.75rem' }}>
+        <h1 style={{ marginBottom: '0.5rem' }}>Choose the focus you need</h1>
       </header>
 
       <div
@@ -121,7 +114,7 @@ const UpgradePage = () => {
               key={plan.tier}
               style={{
                 borderRadius: '1rem',
-                padding: '1.5rem',
+                padding: '2.2rem',
                 background: plan.highlight ? plan.accent : '#fff',
                 color: '#0f172a',
                 border: plan.highlight ? '1px solid #c7d2fe' : '1px solid var(--border)',
@@ -129,14 +122,17 @@ const UpgradePage = () => {
                 position: 'relative',
               }}
             >
-              <h2 style={{ marginTop: 0 }}>{plan.title}</h2>
-              <p style={{ color: plan.highlight ? '#1f3b8a' : 'var(--text-muted)' }}>{plan.subtitle}</p>
-              <p style={{ fontSize: '2.4rem', fontWeight: 700, margin: '1rem 0' }}>{plan.price}</p>
+              <h2 style={{ marginTop: 0, marginBottom: '0.35rem' }}>{plan.title}</h2>
+              <p style={{ color: plan.highlight ? '#1f3b8a' : 'var(--text-muted)', margin: '0 0 0.9rem' }}>
+                {plan.subtitle}
+              </p>
+              <p style={{ fontSize: '2.4rem', fontWeight: 700, margin: '0.5rem 0 1.25rem' }}>{plan.price}</p>
               <ul
                 style={{
                   paddingLeft: '1.1rem',
                   color: plan.highlight ? 'rgba(9, 0, 0, 0.9)' : 'var(--text-muted)',
                   lineHeight: 1.6,
+                  margin: 0,
                 }}
               >
                 {plan.features.map((perk) => (
@@ -196,7 +192,7 @@ const UpgradePage = () => {
         ) : (
           <>
             <p style={{ marginTop: 0, color: 'var(--text-muted)' }}>
-              Manage billing through Stripe. Canceling keeps your paid features until the period ends.
+              Cancel anytime. Canceling keeps your paid features until the period ends.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
               <button
@@ -230,7 +226,7 @@ const UpgradePage = () => {
             </div>
             {!user && (
               <p style={{ color: 'var(--danger)', marginTop: '0.75rem' }}>
-                Sign in to upgrade so we can connect Stripe to your account.
+                Sign in to upgrade.
               </p>
             )}
             {status.error && <p style={{ color: 'var(--danger)', marginTop: '0.75rem' }}>{status.error}</p>}

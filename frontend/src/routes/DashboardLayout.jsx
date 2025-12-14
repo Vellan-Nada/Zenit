@@ -138,28 +138,6 @@ const DashboardLayout = () => {
   };
 
   const handleQuickUpgrade = async () => {
-    // Guest -> signup
-    if (!user) {
-      navigate('/signup');
-      return;
-    }
-    // Free members -> start Plus checkout directly
-    if (planTier === 'free') {
-      if (!token) {
-        navigate('/login');
-        return;
-      }
-      try {
-        const { url } = await createCheckoutSession('plus', token);
-        sessionStorage.setItem('last_checkout', 'subscription');
-        window.location.href = url;
-        return;
-      } catch (err) {
-        console.error('Upgrade failed', err);
-        setToast(err.message || 'Unable to start upgrade checkout');
-      }
-    }
-    // Fallback to upgrade page
     navigate('/upgrade');
   };
 
@@ -291,6 +269,20 @@ const DashboardLayout = () => {
         </main>
       </div>
       <FeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
+      <footer
+        style={{
+          textAlign: 'center',
+          padding: '1rem 0',
+          margin: 0,
+          color: 'rgba(24, 24, 24, 1)',
+          fontSize: '0.95rem',
+          background: 'transparent',
+          border: 'none',
+          boxShadow: 'none',
+        }}
+      >
+        © {new Date().getFullYear()} EverDay. All rights reserved.
+      </footer>
     </>
   );
 };

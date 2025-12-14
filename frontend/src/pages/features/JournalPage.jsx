@@ -9,7 +9,6 @@ import JournalEntryModal from '../../components/Journal/JournalEntryModal.jsx';
 import JournalReport from '../../components/Journal/JournalReport.jsx';
 import PremiumUpsell from '../../components/Journal/PremiumUpsell.jsx';
 import '../../styles/Journal.css';
-import { createCheckoutSession } from '../../api/billingApi.js';
 import { useNavigate } from 'react-router-dom';
 import { goToSignup } from '../../utils/guestSignup.js';
 
@@ -174,17 +173,7 @@ const JournalPage = () => {
   };
 
   const startUpgrade = async () => {
-    if (!token) {
-      navigate('/signup');
-      return;
-    }
-    try {
-      sessionStorage.setItem('last_checkout', 'subscription');
-      const { url } = await createCheckoutSession('subscription', token, 'plus');
-      window.location.href = url;
-    } catch (err) {
-      alert('Unable to start checkout.');
-    }
+    navigate('/upgrade');
   };
 
   if (authLoading || profileLoading) return <LoadingSpinner label="Loading journal…" />;
