@@ -15,7 +15,7 @@ const PLAN_CARDS = [
     accent: '#f8fafc',
     features: [
       'Core tools: Habits, Notes, To-Dos, Pomodoro, Source Dump, Journal, Reading & Movies/Series lists',
-      'Limits: 7 habits • 15 notes • 15 to-dos • 10 reading + 10 watch items per column • 7 Source Dump items (no screenshots)',
+      'Limits: 7 habits • 15 notes • 10 to-dos + 5 yearly & monthly goals • 7 reading + 7 watch items per column • 7 Source Dump items (no screenshots)',
       'Not included: Pomodoro reports • Journaling reports • Card color customization',
     ],
   },
