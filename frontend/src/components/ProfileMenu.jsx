@@ -95,7 +95,7 @@ const ProfileMenu = ({ onUpgradeClick = () => {}, onManageSubscription = () => {
       {open && (
         <div className={styles.dropdown}>
           <div className={styles.dropdownHeader}>
-            <p>{user.email}</p>
+            <p title={user.email}>{user.email}</p>
             <span className={styles.planPill}>{planLabel}</span>
           </div>
           <div className={styles.dropdownActions}>
@@ -117,15 +117,6 @@ const ProfileMenu = ({ onUpgradeClick = () => {}, onManageSubscription = () => {
               }}
             >
               Subscription settings
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false);
-                navigate('/ai-helper');
-              }}
-            >
-              Personalization
             </button>
           </div>
           <button

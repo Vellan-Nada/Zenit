@@ -67,7 +67,7 @@ const TodoSection = ({
       {error && (
         <div className="todo-alert">
           <p>{error}</p>
-          {!isPremium && <UpgradeToPremium variant="compact" />}
+          {!isPremium && isFreeLimitReached && <UpgradeToPremium variant="compact" />}
         </div>
       )}
 

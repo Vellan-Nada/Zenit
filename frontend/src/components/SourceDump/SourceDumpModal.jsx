@@ -12,7 +12,7 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
   const [form, setForm] = useState(EMPTY);
   const [error, setError] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const [pasteHint, setPasteHint] = useState('Paste images here');
+  const [pasteHint, setPasteHint] = useState('Or paste images here...');
 
   useEffect(() => {
     if (initialData) {
@@ -83,7 +83,7 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
       setPasteHint('Images detected and uploading…');
     } else {
       setPasteHint('No images detected on clipboard.');
-      setTimeout(() => setPasteHint('Paste images here'), 1500);
+      setTimeout(() => setPasteHint('Or paste images here...'), 1500);
     }
   };
 
@@ -138,15 +138,17 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
                   contentEditable
                   suppressContentEditableWarning
                   onPaste={handlePaste}
+                  data-placeholder={pasteHint}
+                  aria-label="Paste images here"
                 >
-                  {pasteHint}
+                  {/* placeholder handled via CSS */}
                 </div>
                 {uploading && <p className="sd-muted">Uploading…</p>}
                 {form.screenshots?.length > 0 && (
                   <div className="sd-shots">
                     {form.screenshots.map((path) => (
                       <div key={path} className="sd-shot-item">
-                        <span className="sd-muted">{path}</span>
+                        <span className="sd-muted">Image added</span>
                         <button type="button" onClick={() => handleRemoveShot(path)}>Remove</button>
                       </div>
                     ))}

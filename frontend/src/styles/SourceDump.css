@@ -399,6 +399,11 @@
   overflow: auto;
 }
 
+.sd-paste:empty::before {
+  content: attr(data-placeholder);
+  color: var(--text-muted);
+}
+
 .sd-shots .sd-shot-item {
   display: flex;
   flex-direction: column;

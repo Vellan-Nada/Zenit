@@ -130,14 +130,43 @@ const UpgradePage = () => {
               <p style={{ fontSize: '2.4rem', fontWeight: 700, margin: '0.5rem 0 1.25rem' }}>{plan.price}</p>
               <ul
                 style={{
-                  paddingLeft: '1.1rem',
-                  color: plan.highlight ? 'rgba(255,255,255,0.9)' : 'var(--text-muted)',
+                  listStyle: 'none',
+                  paddingLeft: 0,
+                  color: plan.highlight ? 'rgba(255,255,255,0.9)' : '#38383aff',
                   lineHeight: 1.6,
                   margin: 0,
                 }}
               >
                 {plan.features.map((perk) => (
-                  <li key={perk}>{perk}</li>
+                  <li
+                    key={perk}
+                    style={{
+                      display: 'flex',
+                      gap: '0.6rem',
+                      alignItems: 'flex-start',
+                    }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        marginTop: '0.15rem',
+                        width: '1.1rem',
+                        height: '1.1rem',
+                        borderRadius: '50%',
+                        border: `1px solid ${plan.highlight ? 'rgba(255,255,255,0.7)' : 'rgba(15,23,42,0.2)'}`,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '0.7rem',
+                        fontWeight: 700,
+                        color: plan.highlight ? '#fff' : '#0f172a',
+                        flexShrink: 0,
+                      }}
+                    >
+                      ✓
+                    </span>
+                    <span>{perk}</span>
+                  </li>
                 ))}
               </ul>
               {plan.tier !== 'free' && (
@@ -214,15 +243,18 @@ const UpgradePage = () => {
               <button
                 type="button"
                 onClick={startDonation}
+                disabled={status.checkout === 'donation'}
                 style={{
                   borderRadius: '0.85rem',
                   border: 'none',
                   padding: '0.75rem 1.2rem',
                   background: 'rgba(239,68,68,0.15)',
                   color: '#b91c1c',
+                  opacity: status.checkout === 'donation' ? 0.7 : 1,
+                  cursor: status.checkout === 'donation' ? 'not-allowed' : 'pointer',
                 }}
               >
-                Donate $5 ❤️
+                {status.checkout === 'donation' ? 'Redirecting…' : 'Donate $5 ❤️'}
               </button>
             </div>
             {!user && (

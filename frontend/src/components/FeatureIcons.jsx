@@ -83,6 +83,13 @@ export const FilmIcon = ({ className, size }) => (
   </IconBase>
 );
 
+export const CameraIcon = ({ className, size }) => (
+  <IconBase className={className} size={size}>
+    <path d="M14 3h-4l-2 3H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3z" />
+    <circle cx="12" cy="13" r="3" />
+  </IconBase>
+);
+
 export const LayoutDashboardIcon = ({ className, size }) => (
   <IconBase className={className} size={size}>
     <rect width="7" height="9" x="3" y="3" rx="1" />

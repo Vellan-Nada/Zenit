@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabaseClient.js';
 import PremiumColorUpsell from '../PremiumColorUpsell.jsx';
-import { SourceIcon, NoteIcon, FilmIcon } from '../FeatureIcons.jsx';
+import { SourceIcon, NoteIcon, CameraIcon } from '../FeatureIcons.jsx';
 
 const COLOR_PRESETS = ['#f8fafc', '#e0f2fe', '#fef9c3', '#dcfce7', '#ffe4e6'];
 
@@ -97,7 +97,7 @@ const SourceCard = ({ card, isPremium, onChangeColor, onClick }) => {
         {isPremium && signedShots.length > 0 && (
           <div className="sd-section">
             <strong className="sd-label">
-              <FilmIcon className="sd-label-icon" size={18} />
+              <CameraIcon className="sd-label-icon" size={18} />
               Screenshots
             </strong>
             <div className="sd-shots">
