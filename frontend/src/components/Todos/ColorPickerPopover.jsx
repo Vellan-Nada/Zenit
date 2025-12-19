@@ -18,7 +18,7 @@ const PALETTE = [
 const ColorPickerPopover = ({ isPremium, onSelect, onClose, disabledReason, saving }) => {
   if (!isPremium) {
     return (
-      <div className="todo-color-popover">
+      <div className="todo-color-popover color-upsell-popover">
         <PremiumColorUpsell
           message={disabledReason || 'Color coding is a premium perk.'}
           onClose={onClose}

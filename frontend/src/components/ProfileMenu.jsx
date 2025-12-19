@@ -68,7 +68,7 @@ const ProfileMenu = ({ onUpgradeClick = () => {}, onManageSubscription = () => {
   const planLabel = planLabels[planTier] || planLabels.free;
   const showUpgradeAction = planTier === 'free';
   const upgradeLabel = 'Upgrade to Plus';
-  const showManageSubscription = planTier !== 'free';
+  const showManageSubscription = planTier === 'pro';
 
   const handleManage = () => {
     setOpen(false);
@@ -109,15 +109,17 @@ const ProfileMenu = ({ onUpgradeClick = () => {}, onManageSubscription = () => {
                 Manage subscription
               </button>
             )}
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false);
-                navigate('/upgrade');
-              }}
-            >
-              Subscription settings
-            </button>
+            {planTier !== 'free' && (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  navigate('/upgrade');
+                }}
+              >
+                Subscription settings
+              </button>
+            )}
           </div>
           <button
             type="button"

@@ -79,7 +79,7 @@ const MovieItemCard = ({ item, isPremium, onEdit, onDelete, onMove, onChangeColo
               </div>
             )}
             {showUpsell && (
-              <div className="movie-color-popover" onClick={(e) => e.stopPropagation()}>
+              <div className="movie-color-popover color-upsell-popover" onClick={(e) => e.stopPropagation()}>
                 <PremiumColorUpsell onClose={() => setShowUpsell(false)} />
               </div>
             )}

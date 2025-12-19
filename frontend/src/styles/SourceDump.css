@@ -225,7 +225,7 @@
 .sd-color-popover {
   position: absolute;
   top: 110%;
-  left: 0;
+  left: -200px;
   right: auto;
   z-index: 20;
   background: var(--surface);
@@ -236,7 +236,7 @@
   flex-direction: column;
   gap: 0.35rem;
   box-shadow: var(--app-shadow);
-  min-width: 180px;
+  min-width: 280px;
   max-width: 320px;
   align-items: stretch;
 }

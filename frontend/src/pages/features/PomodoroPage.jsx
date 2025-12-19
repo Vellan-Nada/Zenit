@@ -598,9 +598,9 @@ const PomodoroReportModal = ({ onClose, isPremium, loading, error, sessions }) =
         </div>
         {!isPremium ? (
           <div className="pomodoro-report-upgrade">
-            <p>Detailed reports are a premium feature. Upgrade to unlock.</p>
+            <p>Get to know your total focused time, average session length, days active, and streaks with Plus.</p>
             <button type="button" className="pomodoro-btn primary" onClick={startUpgrade}>
-              Upgrade to Premium
+              Upgrade to Plus
             </button>
           </div>
         ) : loading ? (

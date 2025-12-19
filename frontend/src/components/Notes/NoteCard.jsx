@@ -138,7 +138,7 @@ const NoteCard = ({
             </div>
           )}
           {showUpsell && (
-            <div className="color-popover">
+            <div className="color-popover color-upsell-popover">
               <PremiumColorUpsell onClose={() => setShowUpsell(false)} />
             </div>
           )}

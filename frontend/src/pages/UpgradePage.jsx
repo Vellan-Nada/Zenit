@@ -200,7 +200,7 @@ const UpgradePage = () => {
                 <p
                   style={{
                     marginTop: '0.5rem',
-                    color: plan.highlight ? 'rgba(0, 0, 0, 0.85)' : 'var(--text-muted)',
+                    color: plan.highlight ? 'rgba(255,255,255,0.92)' : 'var(--text-muted)',
                     fontSize: '0.9rem',
                   }}
                 >

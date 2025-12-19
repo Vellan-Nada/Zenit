@@ -81,7 +81,7 @@ const BookCard = ({ item, isPremium, onEdit, onDelete, onMove, onChangeColor }) 
             </div>
           )}
           {showUpsell && (
-            <div className="reading-color-popover" onClick={(e) => e.stopPropagation()}>
+            <div className="reading-color-popover color-upsell-popover" onClick={(e) => e.stopPropagation()}>
               <PremiumColorUpsell onClose={() => setShowUpsell(false)} />
             </div>
           )}

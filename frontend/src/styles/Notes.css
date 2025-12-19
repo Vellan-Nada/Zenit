@@ -243,7 +243,7 @@
 .color-popover {
   position: absolute;
   top: 110%;
-  left: 0;
+  left: -70px;
   right: auto;
   z-index: 20;
   background: var(--surface);
@@ -253,7 +253,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.35rem;
-  min-width: 180px;
+  min-width: 280px;
   max-width: min(320px, calc(100% - 16px));
   align-items: stretch;
 }
