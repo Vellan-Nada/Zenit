@@ -169,6 +169,7 @@
   gap: 0.75rem;
   /* min-height: 150px; */
   position: relative;
+  cursor: pointer;
 }
 
 .note-card-body {
@@ -201,6 +202,20 @@
   resize: vertical;
 }
 
+.note-card-preview {
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.note-card-preview p {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
 .note-card-footer {
   display: flex;
   justify-content: flex-end;
@@ -217,6 +232,100 @@
   color: var(--danger);
   font-size: 0.85rem;
   margin: 0;
+}
+
+.note-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 60;
+}
+
+.note-modal {
+  background: var(--surface);
+  border-radius: 1rem;
+  padding: 3.2rem 1.3rem 1.2rem;
+  width: min(850px, 95vw);
+  max-height: 85vh;
+  box-shadow: var(--app-shadow);
+  border: 1px solid var(--app-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.note-modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.note-modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+}
+
+.note-modal-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+  color: #0f172a;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.note-modal-header input[type='text'] {
+  flex: 1 1 100%;
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1px solid var(--border);
+  padding: 0.65rem 0.75rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.note-modal-textarea {
+  width: 100%;
+  min-height: 300px;
+  border-radius: 0.9rem;
+  border: 1px solid var(--border);
+  padding: 0.75rem;
+  font-size: 1rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.note-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.note-modal-color {
+  position: relative;
+}
+
+.note-modal-popover {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: auto;
+  z-index: 70;
 }
 
 .note-color-picker {

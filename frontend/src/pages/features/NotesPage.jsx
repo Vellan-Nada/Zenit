@@ -5,10 +5,26 @@ import { useGuest } from '../../context/GuestContext.jsx';
 import AddNoteForm from '../../components/Notes/AddNoteForm.jsx';
 import NotesGrid from '../../components/Notes/NotesGrid.jsx';
 import UpgradeToPremium from '../../components/Notes/UpgradeToPremium.jsx';
+import PremiumColorUpsell from '../../components/PremiumColorUpsell.jsx';
 import LoadingSpinner from '../../components/LoadingSpinner.jsx';
 import '../../styles/Notes.css';
 import { goToSignup } from '../../utils/guestSignup.js';
 import { NoteIcon } from '../../components/FeatureIcons.jsx';
+
+const PALETTE = [
+  '#FFFFFF',
+  '#FDF4FF',
+  '#FEF3C7',
+  '#E0F2FE',
+  '#D1FAE5',
+  '#FFE4E6',
+  '#DCFCE7',
+  '#F1F5F9',
+  '#a19b9bff',
+  '#E9D5FF',
+  '#E0E7FF',
+  '#F5F3FF',
+];
 
 const FREE_NOTE_LIMIT = 15;
 
@@ -25,6 +41,10 @@ const NotesPage = () => {
   const [colorSavingId, setColorSavingId] = useState(null);
   const [globalError, setGlobalError] = useState(null);
   const [showLimitAlert, setShowLimitAlert] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [upsellOpen, setUpsellOpen] = useState(false);
+  const [modalError, setModalError] = useState(null);
 
   const guestMode = !user;
   const isPremium = guestMode ? false : Boolean(profile?.is_premium) || ['plus', 'pro'].includes(profile?.plan);
@@ -72,6 +92,13 @@ const NotesPage = () => {
   const resetForm = () => {
     setForm({ title: '', content: '' });
     setAddError(null);
+  };
+
+  const openDetail = (note) => {
+    setSelectedNote(note);
+    setPaletteOpen(false);
+    setUpsellOpen(false);
+    setModalError(null);
   };
 
   const handleAddNote = async () => {
@@ -173,6 +200,13 @@ const NotesPage = () => {
     setNotes((prev) => prev.filter((note) => note.id !== noteId));
   };
 
+  const closeDetail = () => {
+    setSelectedNote(null);
+    setPaletteOpen(false);
+    setUpsellOpen(false);
+    setModalError(null);
+  };
+
   const changeColor = async (noteId, color) => {
     if (!isPremium) return;
     setColorSavingId(noteId);
@@ -201,6 +235,65 @@ const NotesPage = () => {
       throw err;
     } finally {
       setColorSavingId(null);
+    }
+  };
+
+  const handlePaletteToggle = () => {
+    if (!selectedNote) return;
+    if (!isPremium) {
+      setUpsellOpen((prev) => !prev);
+      setPaletteOpen(false);
+      return;
+    }
+    setUpsellOpen(false);
+    setPaletteOpen((prev) => !prev);
+  };
+
+  const handleColorPickModal = async (color) => {
+    if (!selectedNote || !isPremium) return;
+    setModalError(null);
+    try {
+      await changeColor(selectedNote.id, color);
+      setSelectedNote((prev) => (prev ? { ...prev, color } : prev));
+      setPaletteOpen(false);
+    } catch (err) {
+      setModalError(err.message || 'Unable to update color');
+    }
+  };
+
+  const beginEditInModal = () => {
+    if (!selectedNote) return;
+    setEditingId(selectedNote.id);
+    setEditDraft({
+      title: selectedNote.title || '',
+      content: selectedNote.content || '',
+    });
+    setModalError(null);
+  };
+
+  const handleModalSave = async () => {
+    if (!selectedNote) return;
+    const updates = {
+      title: editDraft.title?.trim() || null,
+      content: editDraft.content?.trim() || null,
+    };
+    try {
+      await saveEdit(selectedNote.id);
+      setSelectedNote((prev) => (prev ? { ...prev, ...updates } : prev));
+      setModalError(null);
+    } catch (err) {
+      setModalError(err.message || 'Unable to save changes.');
+    }
+  };
+
+  const handleModalDelete = async () => {
+    if (!selectedNote) return;
+    if (!window.confirm('Delete this note? This cannot be undone.')) return;
+    try {
+      await deleteNote(selectedNote.id);
+      closeDetail();
+    } catch (err) {
+      setModalError(err.message || 'Unable to delete note.');
     }
   };
 
@@ -258,17 +351,129 @@ const NotesPage = () => {
       ) : (
         <NotesGrid
           notes={notes}
-          isPremium={isPremium}
-          editingNoteId={editingId}
-          editDraft={editDraft}
-          onStartEdit={startEdit}
-          onEditField={handleEditField}
-          onCancelEdit={cancelEdit}
-          onSaveEdit={saveEdit}
-          onDeleteNote={deleteNote}
-          onChangeColor={changeColor}
-          colorSavingId={colorSavingId}
+          onOpenDetail={openDetail}
         />
+      )}
+
+      {selectedNote && (
+        <div className="note-modal-backdrop" onClick={closeDetail}>
+          <div className="note-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="note-modal-header">
+              {editingId === selectedNote.id ? (
+                <input
+                  type="text"
+                  value={editDraft.title}
+                  placeholder="Title..."
+                  onChange={(event) => handleEditField('title', event.target.value)}
+                />
+              ) : (
+                <h3>{selectedNote.title || 'Untitled'}</h3>
+              )}
+              <button type="button" className="note-modal-close" onClick={closeDetail} aria-label="Close detail">
+                ✕
+              </button>
+            </div>
+            <div className="note-modal-body">
+              {editingId === selectedNote.id ? (
+                <textarea
+                  rows={8}
+                  value={editDraft.content}
+                  placeholder="Content..."
+                  onChange={(event) => handleEditField('content', event.target.value)}
+                  className="note-modal-textarea"
+                />
+              ) : (
+                <p>{selectedNote.content || 'No content yet.'}</p>
+              )}
+            </div>
+            <div className="note-modal-actions">
+              <div className="note-modal-color">
+                <button
+                  type="button"
+                  aria-label="Change card color"
+                  className={`color-dot ${isPremium ? '' : 'locked'}`}
+                  style={{ background: selectedNote.color || '#e2e8f0' }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePaletteToggle();
+                  }}
+                >
+                  {!isPremium && '🔒'}
+                </button>
+                {paletteOpen && isPremium && (
+                  <div className="color-popover note-modal-popover" onClick={(e) => e.stopPropagation()}>
+                    {PALETTE.map((color) => (
+                      <button
+                        key={color}
+                        type="button"
+                        className="color-swatch"
+                        style={{ background: color }}
+                        onClick={() => handleColorPickModal(color)}
+                        disabled={colorSavingId === selectedNote.id}
+                      />
+                    ))}
+                  </div>
+                )}
+                {upsellOpen && !isPremium && (
+                  <div className="color-popover color-upsell-popover note-modal-popover" onClick={(e) => e.stopPropagation()}>
+                    <PremiumColorUpsell onClose={() => setUpsellOpen(false)} />
+                  </div>
+                )}
+              </div>
+
+              {editingId === selectedNote.id ? (
+                <>
+                  <button
+                    type="button"
+                    className="notes-btn secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      cancelEdit();
+                      setModalError(null);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="notes-btn primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleModalSave();
+                    }}
+                    disabled={!editDraft.title.trim() && !editDraft.content.trim()}
+                  >
+                    Save
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    className="notes-btn secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      beginEditInModal();
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    className="notes-btn danger"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleModalDelete();
+                    }}
+                  >
+                    Delete
+                  </button>
+                </>
+              )}
+            </div>
+            {modalError && <p className="note-card-error">{modalError}</p>}
+          </div>
+        </div>
       )}
     </section>
   );
