@@ -73,6 +73,23 @@
   font-size: 0.9rem;
 }
 
+.helperRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.helperLink {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.helperLink:hover,
+.helperLink:focus {
+  text-decoration: underline;
+}
+
 .inlineLink {
   color: #3c3a36;
   font-weight: 700;

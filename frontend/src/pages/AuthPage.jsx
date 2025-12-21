@@ -131,6 +131,13 @@ const AuthPage = ({ mode = 'login' }) => {
               placeholder="••••••••"
             />
           </div>
+          {mode === 'login' && (
+            <div className={styles.helperRow}>
+              <Link to="/reset-password" className={styles.helperLink}>
+                Forgot password?
+              </Link>
+            </div>
+          )}
           <button className={styles.submitButton} type="submit" disabled={status.loading}>
             {status.loading ? 'Please wait…' : mode === 'login' ? 'Log in' : 'Sign up'}
           </button>

@@ -10,6 +10,7 @@ import MovieSeriesPage from './pages/features/MovieSeriesPage.jsx';
 import JournalingPage from './pages/features/JournalingPage.jsx';
 import SourceDumpPage from './pages/features/SourceDumpPage.jsx';
 import AuthPage from './pages/AuthPage.jsx';
+import ResetPasswordPage from './pages/ResetPasswordPage.jsx';
 import UpgradePage from './pages/UpgradePage.jsx';
 import UpgradeStatusPage from './pages/UpgradeStatusPage.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
@@ -23,6 +24,7 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<AuthPage mode="login" />} />
             <Route path="/signup" element={<AuthPage mode="signup" />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="/" element={<DashboardLayout />}>
               <Route index element={<WelcomePage />} />
               <Route path="habits" element={<HabitTrackerPage />} />

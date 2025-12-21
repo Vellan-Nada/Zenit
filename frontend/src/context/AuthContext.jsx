@@ -114,6 +114,25 @@ export const AuthProvider = ({ children }) => {
     return data;
   }, []);
 
+  const requestPasswordReset = useCallback(async (email) => {
+    const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}/reset-password` : undefined;
+    const { data, error: authError } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo,
+    });
+    if (authError) {
+      throw authError;
+    }
+    return data;
+  }, []);
+
+  const updatePassword = useCallback(async (password) => {
+    const { data, error: authError } = await supabase.auth.updateUser({ password });
+    if (authError) {
+      throw authError;
+    }
+    return data;
+  }, []);
+
   const plan = profile?.plan || 'free';
   const planExpiresAt = profile?.plan_expires_at || null;
   const planTier = ['free', 'plus', 'pro'].includes(plan) ? plan : 'free';
@@ -140,6 +159,8 @@ export const AuthProvider = ({ children }) => {
       signUp,
       signOut,
       signInWithProvider,
+      requestPasswordReset,
+      updatePassword,
       refreshProfile: loadProfile,
     }),
     [
@@ -160,6 +181,8 @@ export const AuthProvider = ({ children }) => {
       signUp,
       signOut,
       signInWithProvider,
+      requestPasswordReset,
+      updatePassword,
       loadProfile,
     ]
   );
