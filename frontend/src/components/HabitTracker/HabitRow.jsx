@@ -52,25 +52,33 @@ const HabitRow = ({
 
   const renderFixedCols = () => (
     <>
-      <td>{index + 1}</td>
-      <td className="habit-col">
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <td className="col-index">{index + 1}</td>
+      <td className="col-habit">
+        <div className="habit-name-cell">
           <strong title={habit.name} className="habit-name-ellipsis">
             {habit.name}
           </strong>
+          <div className="habit-mobile-meta">
+            {showIcons && <span className="habit-icon">{getIconSymbol(habit.icon_key) || '📌'}</span>}
+            {showStreak && (
+              <span className="habit-streak-mobile" title={`Current: ${habit.currentStreak} • Best: ${habit.best_streak}`}>
+                🔥 {habit.currentStreak}
+              </span>
+            )}
+          </div>
         </div>
       </td>
-      <td className="icon-col">
+      <td className="col-icon">
         {showIcons && <span className="habit-icon">{getIconSymbol(habit.icon_key) || '📌'}</span>}
       </td>
-      <td className="streak-col">
+      <td className="col-streak">
         {showStreak && (
           <span title={`Current: ${habit.currentStreak} • Best: ${habit.best_streak}`}>
             {habit.currentStreak}-day
           </span>
         )}
       </td>
-      <td className="actions-col">
+      <td className="col-actions">
         <div className="habit-row-actions">
           <button type="button" className="icon-action" onClick={() => onEdit(habit)} aria-label="Edit habit">
             <EditIcon />
@@ -90,36 +98,51 @@ const HabitRow = ({
 
   const renderDateCols = () =>
     dates.map((date) => {
+      const today = new Date().toISOString().slice(0, 10);
       const cellStatus = habit.statusByDate[date.iso];
+      const isToday = date.iso === today;
+      const isPast = date.iso < today;
       let className = 'status-cell status-empty';
       let symbol = '';
       let content = null;
       let clickable = true;
+
       if (cellStatus === 'na') {
         className = 'status-cell status-na';
         clickable = false;
-      } else if (cellStatus === 'completed') {
-        className = 'status-cell status-completed';
-        symbol = '✔';
-      } else if (cellStatus === 'failed') {
-        className = 'status-cell status-failed';
-        symbol = '✖';
-      } else if (cellStatus === 'none') {
+      } else if (isToday && cellStatus == null) {
         className = 'status-cell status-choice';
         clickable = false;
         content = (
           <div className="status-choice-options">
-            <button type="button" onClick={() => onToggleStatus(habit, date, 'completed')}>
+            <button
+              type="button"
+              className="status-choice-btn status-choice-completed"
+              onClick={() => onToggleStatus(habit, date, 'completed')}
+            >
               ✔
             </button>
-            <button type="button" onClick={() => onToggleStatus(habit, date, 'failed')}>
+            <button
+              type="button"
+              className="status-choice-btn status-choice-failed"
+              onClick={() => onToggleStatus(habit, date, 'failed')}
+            >
               ✖
             </button>
           </div>
         );
+      } else {
+        const displayStatus = cellStatus == null && isPast ? 'failed' : cellStatus;
+        if (displayStatus === 'completed') {
+          className = 'status-cell status-completed';
+          symbol = '✔';
+        } else if (displayStatus === 'failed') {
+          className = 'status-cell status-failed';
+          symbol = '✖';
+        }
       }
       return (
-        <td key={date.iso} className="sticky-dates">
+        <td key={date.iso} className="col-date">
           <div
             className={className}
             onClick={() => clickable && onToggleStatus(habit, date)}

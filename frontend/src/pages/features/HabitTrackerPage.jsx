@@ -42,10 +42,8 @@ const decorateHabit = (habit, habitLogs, range) => {
       lastCompleted = date.label;
     } else if (log?.status === 'failed') {
       statusByDate[date.iso] = 'failed';
-    } else if (date.iso < today) {
-      statusByDate[date.iso] = 'failed';
     } else {
-      statusByDate[date.iso] = 'none';
+      statusByDate[date.iso] = null;
     }
   });
 
@@ -162,9 +160,16 @@ const HabitTrackerPage = () => {
     }
     const logsForHabit = logMap[habit.id] || {};
     const existing = logsForHabit[date.iso];
-    const isCompleted = existing?.status === 'completed';
-    const nextStatus = desiredStatus || (isCompleted ? 'failed' : 'completed');
-    if (desiredStatus && existing?.status === desiredStatus) {
+    const existingStatus = existing?.status || null;
+    let nextStatus = 'completed';
+    if (desiredStatus) {
+      nextStatus = desiredStatus;
+    } else if (existingStatus === 'completed') {
+      nextStatus = 'failed';
+    } else if (existingStatus === 'failed') {
+      nextStatus = 'completed';
+    }
+    if (desiredStatus && existingStatus === desiredStatus) {
       return;
     }
 
