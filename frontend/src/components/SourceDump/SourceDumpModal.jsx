@@ -156,7 +156,7 @@ const SourceDumpModal = ({ isOpen, initialData, isPremium, userId, onClose, onSa
                 )}
               </div>
             ) : (
-              <div className="sd-locked-area" onClick={() => setError('Screenshots are premium only.')}>🔒 Screenshots are a premium feature.</div>
+              <div className="sd-locked-area" onClick={() => setError('Screenshots are premium only.')}>🔒 Screenshots are a plus feature.</div>
             )}
           </div>
         </div>

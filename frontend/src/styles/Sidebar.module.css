@@ -26,7 +26,7 @@
   margin-bottom: 0.1rem;
 }
 
-.brandLink {
+/* .brandLink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,8 @@
   text-decoration: none;
   border: 1px solid var(--border);
   background: transparent;
-}
+  background-color: white;
+} */
 
 .brandLink:hover {
   border-color: var(--border);

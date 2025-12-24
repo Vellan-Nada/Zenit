@@ -270,7 +270,7 @@ const Sidebar = ({
       <div className={styles.sidebarHeader}>
         <div className={styles.brandRow}>
           <NavLink to="/" className={styles.brandLink} onClick={onClose} aria-label="Go to dashboard">
-            <img src="/logo2.png" alt="Zenit logo" className={styles.logoIcon} />
+            <img src="/logo5.png" alt="Zenit logo" className={styles.logoIcon} />
           </NavLink>
           <div className={styles.brand}>
             <h1>Zenit</h1>
@@ -386,7 +386,16 @@ const Sidebar = ({
         </div>
       )}
 
-      <ProfileMenu onUpgradeClick={onUpgradeClick} onManageSubscription={onManageSubscription} />
+      <ProfileMenu
+        onUpgradeClick={() => {
+          onClose();
+          onUpgradeClick();
+        }}
+        onManageSubscription={() => {
+          onClose();
+          onManageSubscription();
+        }}
+      />
     </aside>
   );
 };

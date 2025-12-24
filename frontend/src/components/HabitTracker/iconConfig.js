@@ -5,6 +5,7 @@ export const FREE_ICONS = [
   { key: 'laptop', label: 'Focus', symbol: '💻' },
   { key: 'water', label: 'Hydrate', symbol: '💧' },
   { key: 'sleep', label: 'Sleep', symbol: '😴' },
+  { key: 'cash', label: 'Cash', symbol: '💵' },
 ];
 
 export const PREMIUM_ICONS = [
@@ -14,6 +15,13 @@ export const PREMIUM_ICONS = [
   { key: 'guitar', label: 'Practice', symbol: '🎸' },
   { key: 'language', label: 'Language', symbol: '🌐' },
   { key: 'mind', label: 'Mindfulness', symbol: '🧠' },
+  { key: 'study', label: 'Study', symbol: '📖' },
+  { key: 'music', label: 'Music', symbol: '🎧' },
+  { key: 'create', label: 'Create', symbol: '🎨' },
+  { key: 'travel', label: 'Travel', symbol: '✈️' },
+  { key: 'tidy', label: 'Tidy', symbol: '🧹' },
+  { key: 'stretch', label: 'Stretch', symbol: '🤸' },
+  { key: 'budget', label: 'Budget', symbol: '💳' },
 ];
 
 const ICON_MAP = [...FREE_ICONS, ...PREMIUM_ICONS].reduce((acc, icon) => {
