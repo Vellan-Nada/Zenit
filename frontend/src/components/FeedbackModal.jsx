@@ -51,7 +51,7 @@ const FeedbackModal = ({ open, onClose }) => {
             id="feedback-textarea"
             value={message}
             onChange={(event) => setMessage(event.target.value)}
-            placeholder="Your experience, feature wish, or bug report…"
+            placeholder="Your experience, feature wish, or problems encountered..."
           />
           {status.error && <p style={{ color: 'var(--danger)' }}>{status.error}</p>}
           {status.success && <p style={{ color: 'var(--success)' }}>{status.success}</p>}
